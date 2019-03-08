@@ -1,11 +1,11 @@
 [tool.poetry]
-name = "dotbot-add"
+name = "dotmod"
 version = "0.1.0"
-description = "Track new dotfiles and link them with Dotbot"
+description = "CLI to add and remove dotfiles linked with Dotbot"
 authors = ["Kevin Lane <lane.kevin.a@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/klane/dotbot-add"
+repository = "https://github.com/klane/dotmod"
 
 [tool.poetry.dependencies]
 python = "~2.7 || ^3.4"
