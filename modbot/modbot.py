@@ -6,8 +6,8 @@ from dotbot.dispatcher import Dispatcher
 
 def add(config_file, filename, target=None):
     config = _read_config(config_file)
-    i = [i for i, d in enumerate(config) if 'link' in d.keys()][0]
-    config[i]['link'][filename] = filename if target is None else target
+    i = [i for i, d in enumerate(config) if 'link' in d][0]
+    config[i]['link'][filename] = target if target else filename
 
     with open(config_file, 'w') as f:
         yaml.safe_dump(config, f, default_flow_style=False)
