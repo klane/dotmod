@@ -1,7 +1,8 @@
 import os
+import sys
+import dotbot
 import yaml
 from dotbot.config import ConfigReader
-from dotbot.dispatcher import Dispatcher
 
 
 def add(config_file, filename, target=None):
@@ -34,8 +35,9 @@ def add(config_file, filename, target=None):
     with open(config_file, 'w') as f:
         yaml.safe_dump(config, f, default_flow_style=False)
 
-    dispatcher = Dispatcher(os.getcwd())
-    dispatcher.dispatch(config)
+    os.rename(filename, target)
+    sys.argv[1:] = ['--config-file', config_file]
+    dotbot.main()
 
 
 def _read_config(config_file):
