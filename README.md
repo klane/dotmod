@@ -1,1 +1,1 @@
-# dotmod
+# modbot
