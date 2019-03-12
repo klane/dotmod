@@ -37,6 +37,10 @@ def add(config_file, filename, target=None):
         log.error('File already in config')
         exit(1)
 
+    if not os.path.isfile(os.path.join(path, filename)):
+        log.error('File does not exist')
+        exit(1)
+
     if os.path.isfile(target):
         log.error('File already linked')
         exit(1)
