@@ -37,19 +37,19 @@ def add(config_file, filename, target=None):
         log.error('File already in config')
         exit(1)
 
+    if os.path.isfile(target):
+        log.error('File already linked')
+        exit(1)
+
     config[i]['link'][fullfile] = target.replace(dotfiles + os.sep, '')
 
     with open(config_file, 'w') as f:
         yaml.safe_dump(config, f, default_flow_style=False)
 
-    if not os.path.isfile(target):
-        log.info('Moving {0} from {1} to {2}'.format(filename, path, target_path))
-        os.rename(os.path.join(path, filename), target)
-        sys.argv[1:] = ['--config-file', config_file]
-        dotbot.main()
-    else:
-        log.error('File already linked')
-        exit(1)
+    log.info('Moving {0} from {1} to {2}'.format(filename, path, target_path))
+    os.rename(os.path.join(path, filename), target)
+    sys.argv[1:] = ['--config-file', config_file]
+    dotbot.main()
 
 
 def _read_config(config_file):
