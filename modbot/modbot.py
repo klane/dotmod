@@ -28,7 +28,7 @@ def add(config_file, filename, target=None):
         config_path = dotfiles
 
     fullfile = os.path.join(path.replace(home, '~'), filename)
-    target = os.path.join(target_path.replace(dotfiles, ''), target)
+    target = os.path.join(target_path, target)
     config_file = os.path.join(config_path, config_file)
     config = _read_config(config_file)
     i = [i for i, d in enumerate(config) if 'link' in d][0]
@@ -37,7 +37,7 @@ def add(config_file, filename, target=None):
         log.error('File already in config')
         exit(1)
 
-    config[i]['link'][fullfile] = target
+    config[i]['link'][fullfile] = target.replace(dotfiles + os.sep, '')
 
     with open(config_file, 'w') as f:
         yaml.safe_dump(config, f, default_flow_style=False)
