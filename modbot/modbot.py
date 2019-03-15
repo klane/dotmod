@@ -5,10 +5,11 @@ import yaml
 from dotbot.config import ConfigReader
 from dotbot.messenger import Messenger
 
+HOME = os.getenv('HOME')
+DOTFILES = os.getenv('DOTFILES')
+
 
 def add(config_file, filename, target=None):
-    home = os.getenv('HOME')
-    dotfiles = os.getenv('DOTFILES')
     log = Messenger()
     path, filename = os.path.split(filename)
 
@@ -22,14 +23,14 @@ def add(config_file, filename, target=None):
     config_path, config_file = os.path.split(config_file)
 
     if not config_path:
-        config_path = dotfiles
+        config_path = DOTFILES
 
     if not target_path:
         target_path = config_path
     elif config_path not in target_path:
         target_path = os.path.join(config_path, target_path)
 
-    fullfile = os.path.join(path.replace(home, '~'), filename)
+    fullfile = os.path.join(path.replace(HOME, '~'), filename)
     target = os.path.join(target_path, target)
     config_file = os.path.join(config_path, config_file)
     config = _read_config(config_file)
@@ -47,7 +48,7 @@ def add(config_file, filename, target=None):
         log.error('File already linked')
         exit(1)
 
-    config[i]['link'][fullfile] = target.replace(dotfiles + os.sep, '')
+    config[i]['link'][fullfile] = target.replace(DOTFILES + os.sep, '')
 
     with open(config_file, 'w') as f:
         yaml.safe_dump(config, f, default_flow_style=False)
