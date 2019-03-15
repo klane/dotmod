@@ -3,11 +3,7 @@ import sys
 import dotbot
 import yaml
 from dotbot.config import ConfigReader
-from dotbot.messenger import Messenger
-
-HOME = os.getenv('HOME')
-DOTFILES = os.getenv('DOTFILES')
-LOG = Messenger()
+from modbot import DOTFILES, HOME, LOG
 
 
 class Config(list):
