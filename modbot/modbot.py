@@ -7,10 +7,10 @@ from dotbot.messenger import Messenger
 
 HOME = os.getenv('HOME')
 DOTFILES = os.getenv('DOTFILES')
+LOG = Messenger()
 
 
 def add(config_file, filename, target=None):
-    log = Messenger()
     path, filename = os.path.split(filename)
 
     if not path:
@@ -37,15 +37,15 @@ def add(config_file, filename, target=None):
     i = [i for i, d in enumerate(config) if 'link' in d][0]
 
     if fullfile in config[i]['link']:
-        log.error('File already in config')
+        LOG.error('File already in config')
         exit(1)
 
     if not os.path.isfile(os.path.join(path, filename)):
-        log.error('File does not exist')
+        LOG.error('File does not exist')
         exit(1)
 
     if os.path.isfile(target):
-        log.error('File already linked')
+        LOG.error('File already linked')
         exit(1)
 
     config[i]['link'][fullfile] = target.replace(DOTFILES + os.sep, '')
@@ -53,7 +53,7 @@ def add(config_file, filename, target=None):
     with open(config_file, 'w') as f:
         yaml.safe_dump(config, f, default_flow_style=False)
 
-    log.info('Moving {0} from {1} to {2}'.format(filename, path, target_path))
+    LOG.info('Moving {0} from {1} to {2}'.format(filename, path, target_path))
     os.rename(os.path.join(path, filename), target)
     sys.argv[1:] = ['--config-file', config_file]
     dotbot.main()
