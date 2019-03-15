@@ -1,6 +1,8 @@
 import os
 import sys
+
 import dotbot
+
 from modbot import HOME, LOG
 from modbot.config import Config
 

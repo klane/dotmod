@@ -1,6 +1,8 @@
 import os
+
 import yaml
 from dotbot.config import ConfigReader
+
 from modbot import DOTFILES, LOG
 
 
