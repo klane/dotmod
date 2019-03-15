@@ -21,11 +21,13 @@ def add(config_file, filename, target=None):
     target_path, target = os.path.split(target)
     config_path, config_file = os.path.split(config_file)
 
-    if not target_path:
-        target_path = dotfiles
-
     if not config_path:
         config_path = dotfiles
+
+    if not target_path:
+        target_path = config_path
+    elif config_path not in target_path:
+        target_path = os.path.join(config_path, target_path)
 
     fullfile = os.path.join(path.replace(home, '~'), filename)
     target = os.path.join(target_path, target)
