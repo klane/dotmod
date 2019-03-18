@@ -24,10 +24,10 @@ def add(config_file, filename, target=None):
     elif config.path not in target_path:
         target_path = os.path.join(config.path, target_path)
 
-    fullfile = os.path.join(path.replace(HOME, '~'), filename)
+    filename = os.path.join(path, filename)
     target = os.path.join(target_path, target)
 
-    if not os.path.isfile(os.path.join(path, filename)):
+    if not os.path.isfile(filename):
         LOG.error('File does not exist')
         exit(1)
 
@@ -35,10 +35,10 @@ def add(config_file, filename, target=None):
         LOG.error('File already linked')
         exit(1)
 
-    config.add_link(fullfile, target)
+    config.add_link(filename.replace(HOME, '~'), target)
     config.save()
 
-    LOG.info('Moving {0} from {1} to {2}'.format(filename, path, target_path))
-    os.rename(os.path.join(path, filename), target)
+    LOG.info('Moving {1} from {0} to {2}'.format(*os.path.split(filename), target_path))
+    os.rename(filename, target)
     sys.argv[1:] = ['--config-file', config.file]
     dotbot.main()
