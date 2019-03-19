@@ -42,3 +42,15 @@ def add(config_file, filename, target=None):
     os.rename(filename, target)
     sys.argv[1:] = ['--config-file', config.file]
     dotbot.main()
+
+
+def remove(config_file, filename):
+    config = Config(config_file)
+    link = config.remove_link(filename)
+    config.save()
+
+    LOG.info('Moving {1} to {0}'.format(*os.path.split(link)))
+    os.remove(link)
+    os.rename(filename, link)
+    sys.argv[1:] = ['--config-file', config.file]
+    dotbot.main()

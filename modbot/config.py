@@ -27,6 +27,15 @@ class Config(list):
 
         self.links[key] = value.replace(DOTFILES + os.sep, '')
 
+    def remove_link(self, value):
+        if value not in self.links.values():
+            LOG.error('File not in config')
+            exit(1)
+
+        key = [k for (k, v) in self.links.items() if v == value][0]
+        self.links.pop(key)
+        return key
+
     def save(self):
         with open(self.file, 'w') as f:
             yaml.safe_dump(list(self), f, default_flow_style=False)
