@@ -40,8 +40,7 @@ def add(config_file, filename, target=None):
 
     LOG.info('Moving {1} from {0} to {2}'.format(*os.path.split(filename), target_path))
     os.rename(filename, target)
-    sys.argv[1:] = ['--config-file', config.file]
-    dotbot.main()
+    run_dotbot(config.file)
 
 
 def remove(config_file, filename):
@@ -52,5 +51,9 @@ def remove(config_file, filename):
     LOG.info('Moving {1} to {0}'.format(*os.path.split(link)))
     os.remove(link)
     os.rename(filename, link)
-    sys.argv[1:] = ['--config-file', config.file]
+    run_dotbot(config.file)
+
+
+def run_dotbot(config_file):
+    sys.argv[1:] = ['--config-file', config_file]
     dotbot.main()
