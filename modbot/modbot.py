@@ -8,7 +8,7 @@ from modbot.config import Config
 
 
 def add(config, filename, target=None):
-    config = Config(config) if type(config) is not Config else config
+    config = Config(config) if type(config) is str else config
     path, filename = os.path.split(filename)
 
     if not path:
@@ -44,7 +44,7 @@ def add(config, filename, target=None):
 
 
 def remove(config, filename):
-    config = Config(config) if type(config) is not Config else config
+    config = Config(config) if type(config) is str else config
     link = config.remove_link(filename)
     config.save()
 
