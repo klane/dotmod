@@ -7,8 +7,8 @@ from modbot import HOME, LOG
 from modbot.config import Config
 
 
-def add(config_file, filename, target=None):
-    config = Config(config_file)
+def add(config, filename, target=None):
+    config = Config(config) if type(config) is not Config else config
     path, filename = os.path.split(filename)
 
     if not path:
@@ -43,8 +43,8 @@ def add(config_file, filename, target=None):
     run_dotbot(config.file)
 
 
-def remove(config_file, filename):
-    config = Config(config_file)
+def remove(config, filename):
+    config = Config(config) if type(config) is not Config else config
     link = config.remove_link(filename)
     config.save()
 
