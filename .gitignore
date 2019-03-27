@@ -9,3 +9,6 @@
 
 # pyenv version file
 .python-version
+
+# Byte-compiled files
+__pycache__/
