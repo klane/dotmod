@@ -1,5 +1,6 @@
 import os
 from collections import namedtuple
+from itertools import product
 
 import pytest
 
@@ -8,6 +9,8 @@ from modbot.modbot import add
 
 DOTFILES = os.path.join(HOME, 'dotfiles')
 file = '.testfile'
+options = [(None, HOME), [file], (None, DOTFILES, 'test'), (None, file, file + '1')]
+options = [o for o in product(*options) if o[2] is None or o[3] is not None]
 
 
 @pytest.fixture()
@@ -23,18 +26,7 @@ def mocked_modbot(mocker):
     return mocks(config, dotbot, rename)
 
 
-@pytest.mark.parametrize('source_path, source, target_path, target', [
-    (None, file, None, None),
-    (None, file, None, file),
-    (None, file, None, file + '1'),
-    (None, file, DOTFILES, file),
-    (None, file, DOTFILES, file + '1'),
-    (HOME, file, None, None),
-    (HOME, file, None, file),
-    (HOME, file, None, file + '1'),
-    (HOME, file, DOTFILES, file),
-    (HOME, file, DOTFILES, file + '1')
-])
+@pytest.mark.parametrize('source_path, source, target_path, target', options)
 def test_add(source_path, source, target_path, target, mocker, mocked_modbot):
     config = mocked_modbot.config
     xsource = os.path.join(source_path or os.getcwd(), source)
