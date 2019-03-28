@@ -6,15 +6,16 @@ import pytest
 from modbot import HOME
 from modbot.modbot import add
 
+DOTFILES = os.path.join(HOME, 'dotfiles')
 filename = '.testfile'
 source = os.path.join(HOME, filename)
-target = os.path.join(HOME, 'dotfiles', filename)
+target = os.path.join(DOTFILES, filename)
 
 
 @pytest.fixture()
 def mocked_modbot(mocker):
     config = mocker.MagicMock()
-    config.path = os.path.join(HOME, 'dotfiles')
+    config.path = DOTFILES
     config.file = os.path.join(config.path, 'install.conf.yaml')
 
     dotbot = mocker.patch('modbot.modbot.run_dotbot')
