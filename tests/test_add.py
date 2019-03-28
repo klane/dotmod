@@ -14,7 +14,7 @@ target = os.path.join(os.getcwd(), filename)
 @pytest.fixture()
 def mocked_modbot(mocker):
     config = mocker.MagicMock()
-    config.path = os.path.join(HOME, 'project', 'modbot')
+    config.path = os.path.join(HOME, 'dotfiles')
     config.file = os.path.join(config.path, 'install.conf.yaml')
 
     dotbot = mocker.patch('modbot.modbot.run_dotbot')
