@@ -8,7 +8,7 @@ from modbot.modbot import add
 
 filename = '.testfile'
 source = os.path.join(HOME, filename)
-target = os.path.join(os.getcwd(), filename)
+target = os.path.join(HOME, 'dotfiles', filename)
 
 
 @pytest.fixture()
