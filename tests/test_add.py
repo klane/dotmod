@@ -7,7 +7,7 @@ from modbot import HOME
 from modbot.modbot import add
 
 DOTFILES = os.path.join(HOME, 'dotfiles')
-filename = '.testfile'
+file = '.testfile'
 
 
 @pytest.fixture()
@@ -24,16 +24,16 @@ def mocked_modbot(mocker):
 
 
 @pytest.mark.parametrize('source_path, source_file, target_path, target_file', [
-    (None, filename, None, None),
-    (None, filename, None, filename),
-    (None, filename, None, filename + '1'),
-    (None, filename, DOTFILES, filename),
-    (None, filename, DOTFILES, filename + '1'),
-    (HOME, filename, None, None),
-    (HOME, filename, None, filename),
-    (HOME, filename, None, filename + '1'),
-    (HOME, filename, DOTFILES, filename),
-    (HOME, filename, DOTFILES, filename + '1')
+    (None, file, None, None),
+    (None, file, None, file),
+    (None, file, None, file + '1'),
+    (None, file, DOTFILES, file),
+    (None, file, DOTFILES, file + '1'),
+    (HOME, file, None, None),
+    (HOME, file, None, file),
+    (HOME, file, None, file + '1'),
+    (HOME, file, DOTFILES, file),
+    (HOME, file, DOTFILES, file + '1')
 ])
 def test_add(source_path, source_file, target_path, target_file, mocker, mocked_modbot):
     config = mocked_modbot.config
@@ -57,7 +57,7 @@ def test_add(source_path, source_file, target_path, target_file, mocker, mocked_
     else:
         xtarget = os.path.join(target_path, target_file)
 
-    mocker.patch('os.path.isfile', lambda file: file == xsource)
+    mocker.patch('os.path.isfile', lambda f: f == xsource)
 
     if target is None:
         add(config, source)
