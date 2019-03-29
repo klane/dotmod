@@ -4,9 +4,10 @@ from modbot.modbot import remove
 from tests import *
 
 options = [(None, DOTFILES, 'test'), (file, file + '1')]
+options = list(product(*options))
 
 
-@pytest.mark.parametrize('target_path, target', list(product(*options)))
+@pytest.mark.parametrize('target_path, target', options)
 def test_remove(target_path, target, mocked_modbot, mocker):
     config = mocked_modbot.config
     xsource = os.path.join(HOME, file)
