@@ -47,7 +47,14 @@ def remove(config, filename):
     if config.path not in filename:
         filename = os.path.join(config.path, filename)
 
+    if not os.path.isfile(filename):
+        raise OSError('File {} not in repo'.format(filename))
+
     link = config.remove_link(os.path.relpath(filename, config.path))
+
+    if not os.path.isfile(link):
+        raise OSError('Link {} does not exist'.format(link))
+
     config.save()
 
     LOG.info('Moving {1} to {0}'.format(*os.path.split(link)))
