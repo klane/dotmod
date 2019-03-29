@@ -28,12 +28,10 @@ def add(config, filename, target=None):
     target = os.path.join(target_path, target)
 
     if not os.path.isfile(filename):
-        LOG.error('File does not exist')
-        exit(1)
+        raise OSError('File {} does not exist'.format(filename))
 
     if os.path.isfile(target):
-        LOG.error('File already linked')
-        exit(1)
+        raise OSError('File {} already linked'.format(filename))
 
     config.add_link(filename.replace(HOME, '~'), target)
     config.save()
