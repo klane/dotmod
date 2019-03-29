@@ -45,7 +45,11 @@ def add(config, filename, target=None):
 
 def remove(config, filename):
     config = Config(config) if type(config) is str else config
-    link = config.remove_link(filename)
+
+    if config.path not in filename:
+        filename = os.path.join(config.path, filename)
+
+    link = config.remove_link(os.path.relpath(filename, config.path))
     config.save()
 
     LOG.info('Moving {1} to {0}'.format(*os.path.split(link)))
