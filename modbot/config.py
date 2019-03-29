@@ -25,7 +25,7 @@ class Config(object):
             LOG.error('File already in config')
             exit(1)
 
-        self.links[key] = value.replace(DOTFILES + os.sep, '')
+        self.links[key] = os.path.relpath(value, DOTFILES)
 
     def remove_link(self, value):
         if value not in self.links.values():
