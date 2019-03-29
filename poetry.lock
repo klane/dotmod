@@ -24,14 +24,6 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "0.4.1"
 
 [[package]]
-category = "dev"
-description = "Conditionally enter a context manager"
-name = "conditional"
-optional = false
-python-versions = "*"
-version = "1.3"
-
-[[package]]
 category = "main"
 description = "A tool that bootstraps your dotfiles"
 name = "dotbot"
@@ -247,14 +239,13 @@ python-versions = "*"
 version = "1.1.0"
 
 [metadata]
-content-hash = "a74e86983f8480e72d5735b74cd16c4d9138630c56ddb1f4ec298afae1e64041"
+content-hash = "19121ff2f9e717d5cba0fd30cb620c388dede29b09f5efa551691a09d0079efd"
 python-versions = "~2.7 || ^3.4"
 
 [metadata.hashes]
 atomicwrites = ["03472c30eb2c5d1ba9227e4c2ca66ab8287fbfbbda3888aa93dc2e28fc6811b4", "75a9445bac02d8d058d5e1fe689654ba5a6556a1dfd8ce6ec55a0ed79866cfa6"]
 attrs = ["69c0dbf2ed392de1cb5ec704444b08a5ef81680a61cb899dc08127123af36a79", "f0b870f674851ecbfbbbd364d6b5cbdff9dcedbc7f3f5e18a6891057f21fe399"]
 colorama = ["05eed71e2e327246ad6b38c540c4a3117230b19679b875190486ddd2d721422d", "f8ac84de7840f5b9c4e3347b3c1eaa50f7e49c2b07596221daec5edaabbd7c48"]
-conditional = ["4948fd9c923a9336e96dded17000fa0978122ee3b46ed146190d07c01953c56c", "61599e56358b635e17dc6b86a95de36825d49334ecab20e94c36609c8de92361"]
 dotbot = ["b09eb5639b550bcc616995a3e7d3588ac68e8a53baeef2bb89f35115b2dc1832", "f4fc911e5b6828d05df802aae790e882205d7692a4c9252a0609dd46b2f684b8"]
 funcsigs = ["330cc27ccbf7f1e992e69fef78261dc7c6569012cf397db8d3de0234e6c937ca", "a7bb0f2cf3a3fd1ab2732cb49eba4252c2af4240442415b4abce3b87022a8f50"]
 mock = ["5ce3c71c5545b472da17b72268978914d0252980348636840bd34a00b5cc96c1", "b158b6df76edd239b8208d481dc46b6afd45a846b7812ff0ce58971cf5bc8bba"]
