@@ -45,5 +45,5 @@ def test_remove(target_path, target, mocker, mocked_modbot):
     config.remove_link.assert_called_once_with(os.path.relpath(xtarget, config.path))
     config.save.assert_called_once()
     mocked_remove.assert_called_once_with(xsource)
-    mocked_modbot.dotbot.assert_called_once_with(config.file)
     mocked_modbot.rename.assert_called_once_with(xtarget, xsource)
+    mocked_modbot.dotbot.assert_called_once_with(config.file)

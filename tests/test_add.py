@@ -46,5 +46,5 @@ def test_add(source_path, source, target_path, target, mocker, mocked_modbot):
 
     config.add_link.assert_called_once_with(xsource.replace(HOME, '~'), xtarget)
     config.save.assert_called_once()
-    mocked_modbot.dotbot.assert_called_once_with(config.file)
     mocked_modbot.rename.assert_called_once_with(xsource, xtarget)
+    mocked_modbot.dotbot.assert_called_once_with(config.file)
