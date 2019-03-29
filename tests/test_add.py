@@ -27,7 +27,7 @@ def mocked_modbot(mocker):
 
 
 @pytest.mark.parametrize('source_path, source, target_path, target', options)
-def test_add(source_path, source, target_path, target, mocker, mocked_modbot):
+def test_add(source_path, source, target_path, target, mocked_modbot, mocker):
     config = mocked_modbot.config
     xsource = os.path.join(source_path or os.getcwd(), source)
     xtarget = os.path.join(target_path or config.path, target or source)

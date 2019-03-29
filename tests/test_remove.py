@@ -26,7 +26,7 @@ def mocked_modbot(mocker):
 
 
 @pytest.mark.parametrize('target_path, target', list(product(*options)))
-def test_remove(target_path, target, mocker, mocked_modbot):
+def test_remove(target_path, target, mocked_modbot, mocker):
     config = mocked_modbot.config
     xsource = os.path.join(HOME, file)
     xtarget = os.path.join(target_path or config.path, target)
