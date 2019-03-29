@@ -3,7 +3,7 @@ import os
 import yaml
 from dotbot.config import ConfigReader
 
-from modbot import DOTFILES, LOG
+from modbot import DOTFILES
 
 
 class Config(object):
@@ -22,15 +22,13 @@ class Config(object):
 
     def add_link(self, key, value):
         if key in self.links:
-            LOG.error('File already in config')
-            exit(1)
+            raise ConfigError('File {} already in config'.format(key))
 
         self.links[key] = os.path.relpath(value, DOTFILES)
 
     def remove_link(self, value):
         if value not in self.links.values():
-            LOG.error('File not in config')
-            exit(1)
+            raise ConfigError('File {} not in config'.format(value))
 
         key = [k for (k, v) in self.links.items() if v == value][0]
         self.links.pop(key)
@@ -39,3 +37,7 @@ class Config(object):
     def save(self):
         with open(self.file, 'w') as f:
             yaml.safe_dump(self.config, f, default_flow_style=False)
+
+
+class ConfigError(Exception):
+    pass
