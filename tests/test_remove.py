@@ -1,28 +1,9 @@
-import os
-from collections import namedtuple
 from itertools import product
 
-import pytest
-
-from modbot import HOME
 from modbot.modbot import remove
+from tests import *
 
-DOTFILES = os.path.join(HOME, 'dotfiles')
-file = '.testfile'
 options = [(None, DOTFILES, 'test'), (file, file + '1')]
-
-
-@pytest.fixture()
-def mocked_modbot(mocker):
-    config = mocker.MagicMock()
-    config.path = DOTFILES
-    config.file = os.path.join(config.path, 'install.conf.yaml')
-
-    dotbot = mocker.patch('modbot.modbot.run_dotbot')
-    rename = mocker.patch('os.rename')
-
-    mocks = namedtuple('mocks', 'config dotbot rename')
-    return mocks(config, dotbot, rename)
 
 
 @pytest.mark.parametrize('target_path, target', list(product(*options)))
