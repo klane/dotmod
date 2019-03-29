@@ -1,0 +1,35 @@
+language: python
+cache: pip
+sudo: false
+
+branches:
+  only:
+    - master
+
+python:
+  - 2.7
+  - 3.4
+  - 3.5
+  - 3.6
+
+before_install:
+  - pip install --upgrade pip
+  - curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+  - source $HOME/.poetry/env
+
+install: poetry install
+
+before_script:
+  - pip install codecov coveralls
+
+script: pytest tests/ --cov=modbot
+
+after_success:
+  - codecov
+  - coveralls
+
+jobs:
+  include:
+    - python: 3.7
+      dist: xenial
+      sudo: true
