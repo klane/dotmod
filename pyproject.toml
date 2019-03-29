@@ -14,6 +14,7 @@ dotbot = "^1.14"
 [tool.poetry.dev-dependencies]
 pytest = "^4.3"
 pytest-mock = "^1.10"
+pytest-lazy-fixture = "^0.5.2"
 
 [build-system]
 requires = ["poetry>=0.12"]
