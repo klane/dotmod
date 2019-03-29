@@ -36,7 +36,7 @@ def add(config, filename, target=None):
     config.add_link(filename.replace(HOME, '~'), target)
     config.save()
 
-    LOG.info('Moving {1} from {0} to {2}'.format(*os.path.split(filename), target_path))
+    LOG.info('Moving {2} from {1} to {0}'.format(target_path, *os.path.split(filename)))
     os.rename(filename, target)
     run_dotbot(config.file)
 
