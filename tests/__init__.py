@@ -9,7 +9,7 @@ DOTFILES = os.path.join(HOME, 'dotfiles')
 file = '.testfile'
 
 
-@pytest.fixture()
+@pytest.fixture
 def mocked_modbot(mocker):
     config = mocker.MagicMock()
     config.path = DOTFILES

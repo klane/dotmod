@@ -7,7 +7,7 @@ options = [(None, DOTFILES, 'test'), (file, file + '1')]
 options = list(product(*options))
 
 
-@pytest.fixture()
+@pytest.fixture
 def mocked_isfile(mocked_modbot, mocker):
     mocker.patch('os.path.isfile', lambda f: f == os.path.join(DOTFILES, file))
     return mocked_modbot

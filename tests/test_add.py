@@ -7,7 +7,7 @@ options = [(None, HOME), [file], (None, DOTFILES, 'test'), (None, file, file + '
 options = [o for o in product(*options) if o[2] is None or o[3] is not None]
 
 
-@pytest.fixture()
+@pytest.fixture
 def mocked_isfile(mocked_modbot, mocker):
     mocker.patch('os.path.isfile')
     return mocked_modbot
