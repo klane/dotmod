@@ -11,12 +11,6 @@ options = [(None, DOTFILES, 'test'), (file, file + '1')]
 options = list(product(*options))
 
 
-@pytest.fixture
-def mocked_isfile(mocked_modbot, mocker):
-    mocker.patch('os.path.isfile', lambda f: f == os.path.join(DOTFILES, file))
-    return mocked_modbot
-
-
 @pytest.mark.parametrize('target_path, target', options)
 def test_remove(target_path, target, mocked_modbot, mocker):
     config = mocked_modbot.config

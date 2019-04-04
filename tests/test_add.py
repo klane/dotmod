@@ -11,12 +11,6 @@ options = [(None, HOME), [file], (None, DOTFILES, 'test'), (None, file, file + '
 options = [o for o in product(*options) if o[2] is None or o[3] is not None]
 
 
-@pytest.fixture
-def mocked_isfile(mocked_modbot, mocker):
-    mocker.patch('os.path.isfile')
-    return mocked_modbot
-
-
 @pytest.mark.parametrize('source_path, source, target_path, target', options)
 def test_add(source_path, source, target_path, target, mocked_modbot, mocker):
     config = mocked_modbot.config
@@ -47,4 +41,4 @@ def test_add(source_path, source, target_path, target, mocked_modbot, mocker):
 ])
 def test_exceptions(mocks, message):
     with pytest.raises(OSError, match=message):
-        add(mocks.config, file)
+        add(mocks.config, os.path.join(DOTFILES, file))

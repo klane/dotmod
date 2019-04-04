@@ -4,11 +4,18 @@ from collections import namedtuple
 import pytest
 
 from modbot import HOME, DOTFILES
+from tests import file
 
 
 @pytest.fixture(autouse=True)
 def chdir(monkeypatch):
     monkeypatch.chdir(HOME)
+
+
+@pytest.fixture
+def mocked_isfile(mocked_modbot, mocker):
+    mocker.patch('os.path.isfile', lambda f: f == os.path.join(DOTFILES, file))
+    return mocked_modbot
 
 
 @pytest.fixture
