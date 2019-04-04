@@ -1,5 +1,7 @@
 from itertools import product
 
+import pytest
+
 from modbot.modbot import add
 from tests import *
 
