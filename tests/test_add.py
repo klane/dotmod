@@ -32,13 +32,9 @@ def test_add(source_path, source, target_path, target, mocked_modbot, mocker):
     add(config, source, target)
 
     config.add_link.assert_called_once_with(xsource.replace(HOME, '~'), xtarget)
+    config.save.assert_called_once_with()
     mocked_modbot.rename.assert_called_once_with(xsource, xtarget)
     mocked_modbot.dotbot.assert_called_once_with(config.file)
-
-    try:
-        config.save.assert_called_once()
-    except AttributeError:
-        pass
 
 
 @pytest.mark.parametrize('mocks, message', [
