@@ -33,12 +33,3 @@ def test_remove(target_path, target, mocked_modbot, mocker):
     mocked_remove.assert_called_once_with(xsource)
     mocked_modbot.rename.assert_called_once_with(xtarget, xsource)
     mocked_modbot.dotbot.assert_called_once_with(config.file)
-
-
-@pytest.mark.parametrize('mocks, message', [
-    (pytest.lazy_fixture('mocked_modbot'), 'not in repo'),
-    (pytest.lazy_fixture('mocked_isfile'), 'does not exist')
-])
-def test_exceptions(mocks, message):
-    with pytest.raises(OSError, match=message):
-        remove(mocks.config, file)
