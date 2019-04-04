@@ -3,7 +3,12 @@ from collections import namedtuple
 
 import pytest
 
-from tests import DOTFILES
+from modbot import HOME, DOTFILES
+
+
+@pytest.fixture(autouse=True)
+def chdir(monkeypatch):
+    monkeypatch.chdir(HOME)
 
 
 @pytest.fixture

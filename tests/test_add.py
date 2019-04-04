@@ -1,9 +1,11 @@
+import os
 from itertools import product
 
 import pytest
 
+from modbot import HOME, DOTFILES
 from modbot.modbot import add
-from tests import *
+from tests import file
 
 options = [(None, HOME), [file], (None, DOTFILES, 'test'), (None, file, file + '1')]
 options = [o for o in product(*options) if o[2] is None or o[3] is not None]

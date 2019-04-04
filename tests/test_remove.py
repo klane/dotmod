@@ -1,9 +1,11 @@
+import os
 from itertools import product
 
 import pytest
 
+from modbot import HOME, DOTFILES
 from modbot.modbot import remove
-from tests import *
+from tests import file
 
 options = [(None, DOTFILES, 'test'), (file, file + '1')]
 options = list(product(*options))
