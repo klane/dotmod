@@ -25,6 +25,11 @@ def config_file():
     return data.getvalue()
 
 
+@pytest.fixture
+def config_contents(config_file):
+    return yaml.safe_load(config_file)
+
+
 @pytest.fixture(params=[
     'install.conf.yaml',
     os.path.join(DOTFILES, 'install.conf.yaml')
@@ -40,11 +45,11 @@ def config(config_file, mocker, request):
     return Config(request.param)
 
 
-def test_config(config, config_file):
-    assert all([a == b for a, b in zip(config.config, yaml.safe_load(config_file))])
+def test_config(config, config_contents):
+    assert all([a == b for a, b in zip(config.config, config_contents)])
 
 
-def test_save(config, config_file, mocker):
+def test_save(config, config_contents, mocker):
     mock_open = mocker.mock_open()
     mock_yaml = mocker.patch('yaml.safe_dump')
 
@@ -57,4 +62,5 @@ def test_save(config, config_file, mocker):
 
     mock_open.assert_called_once_with(config.file, 'w')
     mock_file = mock_open(config.file, 'w')
-    mock_yaml.assert_called_once_with(yaml.safe_load(config_file), mock_file, default_flow_style=False)
+    mock_yaml.assert_called_once_with(config_contents, mock_file,
+                                      default_flow_style=False)
