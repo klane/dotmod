@@ -34,7 +34,7 @@ def config(config_file, mocker, request):
 
     try:
         mocker.patch('__builtin__.open', mock_open)
-    except ModuleNotFoundError:
+    except ImportError:
         mocker.patch('builtins.open', mock_open)
 
     return Config(request.param)
