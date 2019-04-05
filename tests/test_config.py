@@ -30,7 +30,13 @@ def config_file():
     os.path.join(DOTFILES, 'install.conf.yaml')
 ])
 def config(config_file, mocker, request):
-    mocker.patch('dotbot.config.open', mocker.mock_open(read_data=config_file))
+    mock_open = mocker.mock_open(read_data=config_file)
+
+    try:
+        mocker.patch('__builtin__.open', mock_open)
+    except ModuleNotFoundError:
+        mocker.patch('builtins.open', mock_open)
+
     return Config(request.param)
 
 
