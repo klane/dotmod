@@ -1,3 +1,4 @@
+import os
 from collections import namedtuple
 
 try:
@@ -10,7 +11,7 @@ import yaml
 
 from modbot import HOME, DOTFILES
 from modbot.config import Config
-from tests import config_file, file, repo_config, repo_file
+from tests import config_file, file, repo_file
 
 
 @pytest.fixture(autouse=True)
@@ -36,7 +37,7 @@ def config_contents(config_yaml):
     return yaml.safe_load(config_yaml)
 
 
-@pytest.fixture(params=[config_file, repo_config])
+@pytest.fixture(params=[os.path.basename(config_file), config_file])
 def mock_config(config_yaml, mocker, request):
     mock_open = mocker.mock_open(read_data=config_yaml)
 
@@ -60,7 +61,7 @@ def mock_isfile(mock_modbot, mocker):
 def mock_modbot(mocker):
     config = mocker.MagicMock()
     config.path = DOTFILES
-    config.file = repo_config
+    config.file = config_file
 
     dotbot = mocker.patch('modbot.modbot.run_dotbot')
     rename = mocker.patch('os.rename')
