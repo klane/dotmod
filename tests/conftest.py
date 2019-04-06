@@ -11,7 +11,7 @@ import yaml
 
 from modbot import HOME, DOTFILES
 from modbot.config import Config
-from tests import file
+from tests import config_file, file
 
 
 @pytest.fixture(autouse=True)
@@ -20,7 +20,7 @@ def chdir(monkeypatch):
 
 
 @pytest.fixture
-def config_file():
+def config_yaml():
     data = StringIO()
     data.write('- defaults:\n')
     data.write('    link:\n')
@@ -33,16 +33,16 @@ def config_file():
 
 
 @pytest.fixture
-def config_contents(config_file):
-    return yaml.safe_load(config_file)
+def config_contents(config_yaml):
+    return yaml.safe_load(config_yaml)
 
 
 @pytest.fixture(params=[
-    'install.conf.yaml',
-    os.path.join(DOTFILES, 'install.conf.yaml')
+    config_file,
+    os.path.join(DOTFILES, config_file)
 ])
-def config(config_file, mocker, request):
-    mock_open = mocker.mock_open(read_data=config_file)
+def config(config_yaml, mocker, request):
+    mock_open = mocker.mock_open(read_data=config_yaml)
 
     try:
         mocker.patch('__builtin__.open', mock_open)
@@ -62,7 +62,7 @@ def mock_isfile(mock_modbot, mocker):
 def mock_modbot(mocker):
     config = mocker.MagicMock()
     config.path = DOTFILES
-    config.file = os.path.join(config.path, 'install.conf.yaml')
+    config.file = os.path.join(config.path, config_file)
 
     dotbot = mocker.patch('modbot.modbot.run_dotbot')
     rename = mocker.patch('os.rename')
