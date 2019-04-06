@@ -41,7 +41,7 @@ def config_contents(config_yaml):
     config_file,
     os.path.join(DOTFILES, config_file)
 ])
-def config(config_yaml, mocker, request):
+def mock_config(config_yaml, mocker, request):
     mock_open = mocker.mock_open(read_data=config_yaml)
 
     try:
