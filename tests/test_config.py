@@ -21,7 +21,7 @@ def config_file():
     data.write('- clean:\n')
     data.write("  - '~'\n")
     data.write('- link:\n')
-    data.write('    ~/.testfile: .testfile]n')
+    data.write('    ~/.testfile: .testfile\n')
     return data.getvalue()
 
 
