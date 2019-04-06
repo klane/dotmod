@@ -4,7 +4,7 @@ import pytest
 
 from modbot import DOTFILES
 from modbot.modbot import add, remove
-from modbot.config import ConfigError
+from modbot.config import Config, ConfigError
 from tests import file, repo_file
 
 
@@ -19,13 +19,12 @@ def test_modbot_exceptions(function, mocks, message):
         function(mocks.config, repo_file)
 
 
-@pytest.mark.parametrize('name, inputs, message', [
-    ('add_link', ['~/' + file, repo_file], 'already in config'),
-    ('remove_link', [os.path.join(DOTFILES, '.fakefile')], 'not in config')
+@pytest.mark.parametrize('method, inputs, message', [
+    (Config.add_link, ['~/' + file, repo_file], 'already in config'),
+    (Config.remove_link, [os.path.join(DOTFILES, '.fakefile')], 'not in config')
 ])
-def test_config_exceptions(mock_config, name, inputs, message):
+def test_config_exceptions(mock_config, method, inputs, message):
     config = mock_config.config
 
     with pytest.raises(ConfigError, match=message):
-        method = getattr(config, name)
-        method(*inputs)
+        method(config, *inputs)
