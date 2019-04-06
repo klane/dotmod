@@ -13,6 +13,13 @@ def test_config(mock_config, config_contents):
     assert all([a == b for a, b in zip(config.links, config_contents[i]['link'])])
 
 
+def test_add_link(mock_config):
+    config = mock_config.config
+    n = len(config.links)
+    config.add_link('~/.testfile2', '.testfile2')
+    assert len(config.links) == n + 1
+
+
 def test_save(mock_config, config_contents, mocker):
     config = mock_config.config
     mock_open = mocker.mock_open()
