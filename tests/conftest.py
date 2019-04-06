@@ -49,7 +49,9 @@ def mock_config(config_yaml, mocker, request):
     except ImportError:
         mocker.patch('builtins.open', mock_open)
 
-    return Config(request.param)
+    config = Config(request.param)
+    mocks = namedtuple('mocks', 'config open')
+    return mocks(config, mock_open)
 
 
 @pytest.fixture
