@@ -1,14 +1,12 @@
-import os
-
 from modbot import DOTFILES
-from tests import config_file, file
+from tests import file, repo_config
 
 
 def test_config(mock_config, config_contents):
     config = mock_config.config
     i = [i for (i, x) in enumerate(config_contents) if 'link' in x.keys()][0]
     assert config.path == DOTFILES
-    assert config.file == os.path.join(DOTFILES, config_file)
+    assert config.file == repo_config
     assert all([a == b for a, b in zip(config.config, config_contents)])
     assert all([a == b for a, b in zip(config.links, config_contents[i]['link'])])
 
