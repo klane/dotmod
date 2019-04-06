@@ -11,7 +11,7 @@ import yaml
 
 from modbot import HOME, DOTFILES
 from modbot.config import Config
-from tests import config_file, file
+from tests import config_file, file, repo_file
 
 
 @pytest.fixture(autouse=True)
@@ -56,7 +56,7 @@ def mock_config(config_yaml, mocker, request):
 
 @pytest.fixture
 def mock_isfile(mock_modbot, mocker):
-    mocker.patch('os.path.isfile', lambda f: f == os.path.join(DOTFILES, file))
+    mocker.patch('os.path.isfile', lambda f: f == repo_file)
     return mock_modbot
 
 
