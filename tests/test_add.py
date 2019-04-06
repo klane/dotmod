@@ -12,8 +12,8 @@ options = [o for o in product(*options) if o[2] is None or o[3] is not None]
 
 
 @pytest.mark.parametrize('source_path, source, target_path, target', options)
-def test_add(source_path, source, target_path, target, mocked_modbot, mocker):
-    config = mocked_modbot.config
+def test_add(source_path, source, target_path, target, mock_modbot, mocker):
+    config = mock_modbot.config
     xsource = os.path.join(source_path or os.getcwd(), source)
     xtarget = os.path.join(target_path or config.path, target or source)
     mocker.patch('os.path.isfile', lambda f: f == xsource)
@@ -31,5 +31,5 @@ def test_add(source_path, source, target_path, target, mocked_modbot, mocker):
 
     config.add_link.assert_called_once_with(xsource.replace(HOME, '~'), xtarget)
     config.save.assert_called_once_with()
-    mocked_modbot.rename.assert_called_once_with(xsource, xtarget)
-    mocked_modbot.dotbot.assert_called_once_with(config.file)
+    mock_modbot.rename.assert_called_once_with(xsource, xtarget)
+    mock_modbot.dotbot.assert_called_once_with(config.file)

@@ -13,13 +13,13 @@ def chdir(monkeypatch):
 
 
 @pytest.fixture
-def mocked_isfile(mocked_modbot, mocker):
+def mock_isfile(mock_modbot, mocker):
     mocker.patch('os.path.isfile', lambda f: f == os.path.join(DOTFILES, file))
-    return mocked_modbot
+    return mock_modbot
 
 
 @pytest.fixture
-def mocked_modbot(mocker):
+def mock_modbot(mocker):
     config = mocker.MagicMock()
     config.path = DOTFILES
     config.file = os.path.join(config.path, 'install.conf.yaml')
