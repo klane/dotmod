@@ -13,6 +13,6 @@ from tests import file
     (remove, pytest.lazy_fixture('mock_modbot'), 'not in repo'),
     (remove, pytest.lazy_fixture('mock_isfile'), 'does not exist')
 ])
-def test_exceptions(function, mocks, message):
+def test_modbot_exceptions(function, mocks, message):
     with pytest.raises(OSError, match=message):
         function(mocks.config, os.path.join(DOTFILES, file))
