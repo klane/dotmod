@@ -21,6 +21,14 @@ def test_add_link(mock_config):
     assert len(config.links) == n + 1
 
 
+def test_remove_link(mock_config):
+    config = mock_config.config
+    n = len(config.links)
+    key = config.remove_link(file)
+    assert len(config.links) == n - 1
+    assert key == '~/' + file
+
+
 def test_save(mock_config, config_contents, mocker):
     config = mock_config.config
     mock_open = mocker.mock_open()
