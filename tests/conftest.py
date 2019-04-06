@@ -28,7 +28,7 @@ def config_yaml():
     data.write('- clean:\n')
     data.write("  - '~'\n")
     data.write('- link:\n')
-    data.write('    ~/.testfile: .testfile\n')
+    data.write('    ~/{0}: {0}\n'.format(file))
     return data.getvalue()
 
 
