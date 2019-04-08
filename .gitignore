@@ -8,6 +8,7 @@ __pycache__/
 .idea/
 
 # Local package installation
+pip-wheel-metadata/
 *.egg-info/
 
 # pytest coverage report
