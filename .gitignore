@@ -1,6 +1,3 @@
-# Byte-compiled files
-__pycache__/
-
 # Local virtual environment
 .venv/
 
@@ -10,6 +7,9 @@ __pycache__/
 # Local package installation
 pip-wheel-metadata/
 *.egg-info/
+
+# Python byte code
+*.pyc
 
 # pytest coverage report
 .coverage
