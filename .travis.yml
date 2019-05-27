@@ -19,14 +19,11 @@ before_install:
 
 install: poetry install
 
-before_script:
-  - pip install codecov coveralls
+before_script: pip install codecov
 
 script: pytest tests/ --cov=modbot
 
-after_success:
-  - codecov
-  - coveralls
+after_success: codecov
 
 jobs:
   include:
