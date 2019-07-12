@@ -24,7 +24,7 @@ legacy_tox_ini = """
 [tox]
 isolated_build = true
 skipsdist = true
-envlist = py{27,34,35,36,37}
+envlist = py{27,35,36,37}
 
 [testenv]
 skip_install = true
