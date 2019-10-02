@@ -15,7 +15,7 @@ dotbot = "^1.14"
 pytest = "^4.6"
 pytest-cov = "^2.7"
 pytest-lazy-fixture = "^0.5.2"
-pytest-mock = "^1.10"
+pytest-mock = "^1.11"
 pytest-sugar = "^0.9.2"
 tox = "^3.14"
 
