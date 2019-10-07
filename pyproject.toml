@@ -20,6 +20,17 @@ pytest-sugar = "^0.9.2"
 pre-commit = "^1.18"
 tox = "^3.14"
 
+[tool.black]
+line-length = 88
+
+[tool.isort]
+known_third_party = ["dotbot", "pytest", "yaml"]
+line_length = 88
+multi_line_output = 3
+force_grid_wrap = 0
+include_trailing_comma = "True"
+use_parentheses = "True"
+
 [tool.tox]
 legacy_tox_ini = """
 [tox]
@@ -34,6 +45,11 @@ setenv = HOME = {env:HOME:home}
 commands =
     poetry install
     poetry run pytest tests/ --cov=modbot
+
+[flake8]
+ignore = E203, F401, W503
+max-line-length = 88
+select = B,C,E,F,W,T4,B9
 """
 
 [build-system]
