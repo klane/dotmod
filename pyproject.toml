@@ -36,7 +36,7 @@ legacy_tox_ini = """
 [tox]
 isolated_build = true
 skipsdist = true
-envlist = py{27,35,36,37}
+envlist = py{27,35,36,37},lint
 
 [testenv]
 skip_install = true
@@ -45,6 +45,12 @@ setenv = HOME = {env:HOME:home}
 commands =
     poetry install
     poetry run pytest tests/ --cov=modbot
+
+[testenv:lint]
+deps = pre-commit
+commands =
+    pre-commit install-hooks
+    pre-commit run --all-files
 
 [flake8]
 ignore = E203, F401, W503
