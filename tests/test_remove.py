@@ -3,7 +3,7 @@ from itertools import product
 
 import pytest
 
-from modbot import HOME, DOTFILES
+from modbot import DOTFILES, HOME
 from modbot.modbot import remove
 from tests import file
 

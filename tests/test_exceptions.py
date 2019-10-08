@@ -3,8 +3,8 @@ import os
 import pytest
 
 from modbot import DOTFILES
-from modbot.modbot import add, remove
 from modbot.config import Config, ConfigError
+from modbot.modbot import add, remove
 from tests import file, repo_file
 
 

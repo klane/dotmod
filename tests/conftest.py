@@ -1,17 +1,17 @@
 import os
 from collections import namedtuple
 
+import pytest
+import yaml
+
+from modbot import DOTFILES, HOME
+from modbot.config import Config
+from tests import config_file, file, repo_file
+
 try:
     from StringIO import StringIO
 except ImportError:
     from io import StringIO
-
-import pytest
-import yaml
-
-from modbot import HOME, DOTFILES
-from modbot.config import Config
-from tests import config_file, file, repo_file
 
 
 @pytest.fixture(autouse=True)
