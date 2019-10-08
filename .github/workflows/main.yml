@@ -1,0 +1,90 @@
+name: Main
+
+on: push
+
+jobs:
+  Safety:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - name: Install Poetry
+        run: |
+          curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+      - name: Install Safety
+        run: |
+          pip install safety
+      - name: Check dependencies
+        run: |
+          source $HOME/.poetry/env
+          poetry show -a | sed 's/(!)//' | awk '{print $1,"==",$2}' | safety check --stdin
+
+  Linting:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - name: Install pre-commit
+        run: |
+          pip install pre-commit
+          pre-commit install-hooks
+      - name: Run hooks
+        run: |
+          pre-commit run --all-files
+
+  test:
+    name: "${{ matrix.os_name }}: Python ${{ matrix.python }}"
+    needs: [Safety, Linting]
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python: [2.7, 3.5, 3.6, 3.7]
+        include:
+          - os: ubuntu-latest
+            os_name: Linux
+          - os: macos-latest
+            os_name: macOS
+          - os: windows-latest
+            os_name: Windows
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Set up Python ${{ matrix.python }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install Poetry
+        run: |
+          curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+      - name: Install dependencies
+        if: matrix.os_name != 'Windows'
+        run: |
+          source $HOME/.poetry/env
+          poetry install
+      - name: Install dependencies
+        if: matrix.os_name == 'Windows'
+        run: |
+          SET PATH=%USERPROFILE%\\.poetry\\bin;%PATH%
+          poetry install
+      - name: Runs tests
+        if: matrix.os_name != 'Windows'
+        run: |
+          source $HOME/.poetry/env
+          poetry run pytest tests/ --cov=modbot
+      - name: Runs tests
+        if: matrix.os_name == 'Windows'
+        run: |
+          SET PATH=%USERPROFILE%\\.poetry\\bin;%PATH%
+          poetry run pytest tests/ --cov=modbot
