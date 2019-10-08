@@ -1,3 +1,5 @@
+import os
+
 from modbot import DOTFILES
 from tests import config_file, file
 
@@ -15,8 +17,9 @@ def test_add_link(mock_config):
     config = mock_config.config
     n = len(config.links)
     newfile = file + '1'
-    config.add_link('~/' + newfile, newfile)
+    config.add_link('~/' + newfile, os.path.join(DOTFILES, newfile))
     assert len(config.links) == n + 1
+    assert config.links['~/' + newfile] == newfile
 
 
 def test_remove_link(mock_config):
