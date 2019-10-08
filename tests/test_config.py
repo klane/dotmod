@@ -41,8 +41,9 @@ def test_save(mock_config, config_contents, mocker):
 
     mock_open.assert_called_once_with(config.file, 'w')
     mock_file = mock_open(config.file, 'w')
-    mock_yaml.assert_called_once_with(config_contents, mock_file,
-                                      default_flow_style=False)
+    mock_yaml.assert_called_once_with(
+        config_contents, mock_file, default_flow_style=False
+    )
 
 
 def test_open(mock_config):
