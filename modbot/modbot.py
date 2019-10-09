@@ -7,7 +7,7 @@ from . import HOME, LOG
 from .config import Config
 
 
-def add(config, filename, target=None):
+def add(config, filename, target=None, run=False):
     config = Config(config) if type(config) is str else config
     path, filename = os.path.split(filename)
 
@@ -38,10 +38,12 @@ def add(config, filename, target=None):
 
     LOG.info('Moving {2} from {1} to {0}'.format(target_path, *os.path.split(filename)))
     os.rename(filename, target)
-    run_dotbot(config.file)
+
+    if run:
+        run_dotbot(config.file)
 
 
-def remove(config, filename):
+def remove(config, filename, run=False):
     config = Config(config) if type(config) is str else config
 
     if config.path not in filename:
@@ -60,7 +62,9 @@ def remove(config, filename):
     LOG.info('Moving {1} to {0}'.format(*os.path.split(link)))
     os.remove(link)
     os.rename(filename, link)
-    run_dotbot(config.file)
+
+    if run:
+        run_dotbot(config.file)
 
 
 def run_dotbot(config_file):

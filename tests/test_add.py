@@ -7,12 +7,18 @@ from modbot import DOTFILES, HOME
 from modbot.modbot import add
 from tests import file
 
-options = [(None, HOME), [file], (None, DOTFILES, 'test'), (None, file, file + '1')]
+options = [
+    (None, HOME),
+    [file],
+    (None, DOTFILES, 'test'),
+    (None, file, file + '1'),
+    (False, True),
+]
 options = [o for o in product(*options) if o[2] is None or o[3] is not None]
 
 
-@pytest.mark.parametrize('source_path, source, target_path, target', options)
-def test_add(source_path, source, target_path, target, mock_modbot, mocker):
+@pytest.mark.parametrize('source_path, source, target_path, target, run', options)
+def test_add(source_path, source, target_path, target, run, mock_modbot, mocker):
     config = mock_modbot.config
     xsource = os.path.join(source_path or os.getcwd(), source)
     xtarget = os.path.join(target_path or config.path, target or source)
@@ -27,9 +33,13 @@ def test_add(source_path, source, target_path, target, mock_modbot, mocker):
     if config.path not in xtarget:
         xtarget = os.path.join(config.path, xtarget)
 
-    add(config, source, target)
+    add(config, source, target, run)
 
     config.add_link.assert_called_once_with(xsource.replace(HOME, '~'), xtarget)
     config.save.assert_called_once_with()
     mock_modbot.rename.assert_called_once_with(xsource, xtarget)
-    mock_modbot.dotbot.assert_called_once_with(config.file)
+
+    if run:
+        mock_modbot.dotbot.assert_called_once_with(config.file)
+    else:
+        mock_modbot.dotbot.assert_not_called()

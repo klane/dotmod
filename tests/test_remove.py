@@ -7,12 +7,12 @@ from modbot import DOTFILES, HOME
 from modbot.modbot import remove
 from tests import file
 
-options = [(None, DOTFILES, 'test'), (file, file + '1')]
+options = [(None, DOTFILES, 'test'), (file, file + '1'), (False, True)]
 options = list(product(*options))
 
 
-@pytest.mark.parametrize('target_path, target', options)
-def test_remove(target_path, target, mock_modbot, mocker):
+@pytest.mark.parametrize('target_path, target, run', options)
+def test_remove(target_path, target, run, mock_modbot, mocker):
     config = mock_modbot.config
     xsource = os.path.join(HOME, file)
     xtarget = os.path.join(target_path or config.path, target)
@@ -26,10 +26,14 @@ def test_remove(target_path, target, mock_modbot, mocker):
 
     mocker.patch('os.path.isfile', lambda f: f in (xsource, xtarget))
     mock_remove = mocker.patch('os.remove')
-    remove(config, target)
+    remove(config, target, run)
 
     config.remove_link.assert_called_once_with(os.path.relpath(xtarget, config.path))
     config.save.assert_called_once_with()
     mock_remove.assert_called_once_with(xsource)
     mock_modbot.rename.assert_called_once_with(xtarget, xsource)
-    mock_modbot.dotbot.assert_called_once_with(config.file)
+
+    if run:
+        mock_modbot.dotbot.assert_called_once_with(config.file)
+    else:
+        mock_modbot.dotbot.assert_not_called()
