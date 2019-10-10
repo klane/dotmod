@@ -19,6 +19,9 @@ def add(config, filename, target=None, run=False):
 
     target_path, target = os.path.split(target)
 
+    if not target:
+        target = filename
+
     if not target_path:
         target_path = config.path
     elif config.path not in target_path:

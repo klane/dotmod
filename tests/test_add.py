@@ -14,7 +14,7 @@ options = [
     (None, file, file + '1'),
     (False, True),
 ]
-options = [o for o in product(*options) if o[2] is None or o[3] is not None]
+options = list(product(*options))
 
 
 @pytest.mark.parametrize('source_path, source, target_path, target, run', options)
@@ -28,7 +28,7 @@ def test_add(source_path, source, target_path, target, run, mock_modbot, mocker)
         source = os.path.join(source_path, source)
 
     if target_path is not None:
-        target = os.path.join(target_path, target)
+        target = os.path.join(target_path, target or '')
 
     if config.path not in xtarget:
         xtarget = os.path.join(config.path, xtarget)
