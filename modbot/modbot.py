@@ -38,8 +38,7 @@ def add(config, filename, target=None, run=False):
 
     config.add_link(filename.replace(HOME, '~'), target)
     config.save()
-
-    LOG.info('Moving {2} from {1} to {0}'.format(target_path, *os.path.split(filename)))
+    notify(filename, target)
     os.rename(filename, target)
 
     if run:
@@ -61,13 +60,22 @@ def remove(config, filename, run=False):
         raise OSError('Link {} does not exist'.format(link))
 
     config.save()
-
-    LOG.info('Moving {1} to {0}'.format(*os.path.split(link)))
+    notify(filename, link)
     os.remove(link)
     os.rename(filename, link)
 
     if run:
         run_dotbot(config.file)
+
+
+def notify(src, dst):
+    src = src.replace(HOME, '~')
+    dst = dst.replace(HOME, '~')
+
+    if os.path.basename(src) == os.path.basename(dst):
+        dst = os.path.dirname(dst)
+
+    LOG.info('Moving {2} from {1} to {0}'.format(dst, *os.path.split(src)))
 
 
 def run_dotbot(config_file):
