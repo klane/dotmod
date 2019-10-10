@@ -3,7 +3,7 @@ import sys
 
 import dotbot
 
-from . import HOME, LOG
+from . import DOTFILES, HOME, LOG
 from .config import Config
 
 
@@ -54,10 +54,11 @@ def remove(config, filename, run=False):
     if not os.path.isfile(filename):
         raise OSError('File {} not in repo'.format(filename))
 
-    link = config.remove_link(os.path.relpath(filename, config.path))
+    link_display = config.remove_link(os.path.relpath(filename, DOTFILES))
+    link = link_display.replace('~', HOME)
 
     if not os.path.isfile(link):
-        raise OSError('Link {} does not exist'.format(link))
+        raise OSError('Link {} does not exist'.format(link_display))
 
     config.save()
     notify(filename, link)
