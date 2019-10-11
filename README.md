@@ -1,5 +1,6 @@
 # ModBot: Add & Remove Dotbot Files
 
+[![Test Status](https://github.com/klane/modbot/workflows/Tests/badge.svg)](https://github.com/klane/modbot/actions)
 [![Unix Build Status](https://img.shields.io/travis/com/klane/modbot.svg?label=Unix&logo=travis)](https://travis-ci.com/klane/modbot)
 [![Windows Build Status](https://img.shields.io/appveyor/ci/klane/modbot.svg?label=Windows&logo=appveyor)](https://ci.appveyor.com/project/klane/modbot)
 [![Coverage Status](https://img.shields.io/codecov/c/github/klane/modbot.svg?label=Coverage&logo=codecov)](https://codecov.io/gh/klane/modbot)
