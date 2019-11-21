@@ -43,13 +43,18 @@ jobs:
           pre-commit run --all-files
 
   unix:
-    name: "${{ runner.os }}: Python ${{ matrix.python }}"
+    name: "${{ matrix.os_name }}: Python ${{ matrix.python }}"
     needs: [Safety, Linting]
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
         python: [2.7, 3.5, 3.6, 3.7]
+        include:
+          - os: ubuntu-latest
+            os_name: Linux
+          - os: macos-latest
+            os_name: macOS
 
     steps:
       - name: Checkout
