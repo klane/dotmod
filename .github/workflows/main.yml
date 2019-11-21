@@ -53,8 +53,10 @@ jobs:
         include:
           - os: ubuntu-latest
             os_name: Linux
+            cache: ~/.cache/pypoetry
           - os: macos-latest
             os_name: macOS
+            cache: ~/Library/Caches/pypoetry
 
     steps:
       - name: Checkout
@@ -68,17 +70,8 @@ jobs:
           curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
       - name: Restore cache
         uses: actions/cache@v1
-        if: startsWith(runner.os, 'Linux')
         with:
-          path: ~/.cache/pypoetry
-          key: ${{ runner.os }}-python${{ matrix.python }}-poetry-${{ hashFiles('poetry.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-python${{ matrix.python }}-poetry-
-      - name: Restore cache
-        uses: actions/cache@v1
-        if: startsWith(runner.os, 'macOS')
-        with:
-          path: ~/Library/Caches/pypoetry
+          path: ${{ matrix.cache }}
           key: ${{ runner.os }}-python${{ matrix.python }}-poetry-${{ hashFiles('poetry.lock') }}
           restore-keys: |
             ${{ runner.os }}-python${{ matrix.python }}-poetry-
