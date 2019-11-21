@@ -68,6 +68,7 @@ jobs:
       - name: Install Poetry
         run: |
           curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+          echo "::add-path::$HOME/.poetry/env"
       - name: Restore cache
         uses: actions/cache@v1
         with:
@@ -77,11 +78,9 @@ jobs:
             ${{ runner.os }}-python${{ matrix.python }}-poetry-
       - name: Install dependencies
         run: |
-          source $HOME/.poetry/env
           poetry install
       - name: Runs tests
         run: |
-          source $HOME/.poetry/env
           poetry run pytest tests/ --cov=modbot
           poetry run coverage xml
       - name: Upload coverage report
