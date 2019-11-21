@@ -83,12 +83,13 @@ jobs:
         run: |
           source $HOME/.poetry/env
           poetry run pytest tests/ --cov=modbot
+          poetry run coverage xml
       - name: Upload coverage report
         if: success()
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./.coverage
+          file: ./coverage.xml
 
   windows:
     name: "Windows: Python ${{ matrix.python }}"
@@ -123,9 +124,10 @@ jobs:
         run: |
           $env:Path += ";$env:Userprofile\.poetry\bin"
           poetry run pytest tests/ --cov=modbot
+          poetry run coverage xml
       - name: Upload coverage report
         if: success()
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./.coverage
+          file: ./coverage.xml
