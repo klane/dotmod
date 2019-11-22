@@ -62,16 +62,16 @@ jobs:
         include:
           - os: ubuntu-latest
             os_name: Linux
-            path: ~/.poetry/bin
-            cache: ~/.cache/pypoetry
+            poetry_path: ~/.poetry/bin
+            poetry_cache: ~/.cache/pypoetry
           - os: macos-latest
             os_name: macOS
-            path: ~/.poetry/bin
-            cache: ~/Library/Caches/pypoetry
+            poetry_path: ~/.poetry/bin
+            poetry_cache: ~/Library/Caches/pypoetry
           - os: windows-latest
             os_name: Windows
-            path: $env:Userprofile\.poetry\bin
-            cache: ~\AppData\Local\pypoetry\Cache
+            poetry_path: $env:Userprofile\.poetry\bin
+            poetry_cache: ~\AppData\Local\pypoetry\Cache
 
     steps:
       - name: Checkout
@@ -83,11 +83,11 @@ jobs:
       - name: Install Poetry
         run: |
           curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
-          echo "::add-path::${{ matrix.path }}"
+          echo "::add-path::${{ matrix.poetry_path }}"
       - name: Restore cache
         uses: actions/cache@v1
         with:
-          path: ${{ matrix.cache }}
+          path: ${{ matrix.poetry_cache }}
           key: ${{ runner.os }}-python${{ matrix.python }}-poetry-${{ hashFiles('poetry.lock') }}
           restore-keys: |
             ${{ runner.os }}-python${{ matrix.python }}-poetry-
