@@ -61,7 +61,7 @@ jobs:
             cache: ~/Library/Caches/pypoetry
           - os: windows-latest
             os_name: Windows
-            path: Userprofile\.poetry\bin
+            path: $env:Userprofile\.poetry\bin
             cache: ~\AppData\Local\pypoetry\Cache
 
     steps:
