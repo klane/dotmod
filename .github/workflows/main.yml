@@ -42,13 +42,13 @@ jobs:
         run: |
           pre-commit run --all-files
 
-  unix:
+  test:
     name: "${{ matrix.os_name }}: Python ${{ matrix.python }}"
     needs: [Safety, Linting]
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
         python: [2.7, 3.5, 3.6, 3.7]
         include:
           - os: ubuntu-latest
@@ -59,6 +59,10 @@ jobs:
             os_name: macOS
             path: ~/.poetry/bin
             cache: ~/Library/Caches/pypoetry
+          - os: windows-latest
+            os_name: Windows
+            path: ~\.poetry\bin
+            cache: ~\AppData\Local\pypoetry\Cache
 
     steps:
       - name: Checkout
@@ -83,47 +87,6 @@ jobs:
           poetry install
       - name: Runs tests
         run: |
-          poetry run pytest tests/ --cov=modbot
-          poetry run coverage xml
-      - name: Upload coverage report
-        if: success()
-        uses: codecov/codecov-action@v1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./coverage.xml
-
-  windows:
-    name: "Windows: Python ${{ matrix.python }}"
-    needs: [Safety, Linting]
-    runs-on: windows-latest
-    strategy:
-      matrix:
-        python: [2.7, 3.5, 3.6, 3.7]
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      - name: Set up Python ${{ matrix.python }}
-        uses: actions/setup-python@v1
-        with:
-          python-version: ${{ matrix.python }}
-      - name: Install Poetry
-        run: |
-          curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
-      - name: Restore cache
-        uses: actions/cache@v1
-        with:
-          path: ~\AppData\Local\pypoetry\Cache
-          key: ${{ runner.os }}-python${{ matrix.python }}-poetry-${{ hashFiles('poetry.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-python${{ matrix.python }}-poetry-
-      - name: Install dependencies
-        run: |
-          $env:Path += ";$env:Userprofile\.poetry\bin"
-          poetry install
-      - name: Runs tests
-        run: |
-          $env:Path += ";$env:Userprofile\.poetry\bin"
           poetry run pytest tests/ --cov=modbot
           poetry run coverage xml
       - name: Upload coverage report
