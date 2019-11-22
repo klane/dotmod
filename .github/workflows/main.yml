@@ -53,9 +53,11 @@ jobs:
         include:
           - os: ubuntu-latest
             os_name: Linux
+            path: ~/.poetry/bin
             cache: ~/.cache/pypoetry
           - os: macos-latest
             os_name: macOS
+            path: ~/.poetry/bin
             cache: ~/Library/Caches/pypoetry
 
     steps:
@@ -68,7 +70,7 @@ jobs:
       - name: Install Poetry
         run: |
           curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
-          echo "::add-path::$HOME/.poetry/bin"
+          echo "::add-path::${{ matrix.path }}"
       - name: Restore cache
         uses: actions/cache@v1
         with:
