@@ -104,11 +104,19 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./coverage.xml
+
+  Slack:
+    needs: [test]
+    runs-on: ubuntu-latest
+    if: always()
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
       - name: Slack notification
         uses: homoluctus/slatify@master
-        if: always()
         with:
-          type: ${{ job.status }}
+          type: ${{ jobs.test.status }}
           job_name: ':robot_face: *CI*'
           url: ${{ secrets.SLACK_WEBHOOK }}
           commit: 'true'
