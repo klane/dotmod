@@ -128,12 +128,3 @@ jobs:
           url: ${{ secrets.SLACK_WEBHOOK }}
           commit: 'true'
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Slack notification
-        uses: 8398a7/action-slack@v2
-        if: always()
-        with:
-          status: ${{ job.status }}
-          author_name: ':snake: Tests'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
