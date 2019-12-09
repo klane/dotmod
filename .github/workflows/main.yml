@@ -91,9 +91,12 @@ jobs:
           key: poetry-python${{ matrix.python }}-${{ runner.os }}-${{ hashFiles('poetry.lock') }}
           restore-keys: |
             poetry-python${{ matrix.python }}-${{ runner.os }}-
+      - name: Remove egg link on macOS
+        if: startsWith(runner.os, 'macOS')
+        run: |
+          rm ${{ matrix.poetry_cache }}/virtualenvs/modbot-py${{ matrix.python }}/lib/python${{ matrix.python }}/site-packages/modbot.egg-link
       - name: Install dependencies
         run: |
-          rm -f ${{ matrix.poetry_cache }}/virtualenvs/modbot-py${{ matrix.python }}/lib/python${{ matrix.python }}/site-packages/modbot.egg-link
           poetry install
       - name: Runs tests
         run: |
