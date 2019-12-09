@@ -1,4 +1,7 @@
 import os
+import sys
+
+import pytest
 
 from modbot import DOTFILES
 from tests import config_file, file
@@ -30,6 +33,7 @@ def test_remove_link(mock_config):
     assert key == '~/' + file
 
 
+@pytest.mark.skipif(sys.version_info.major == 2, reason='requires python3')
 def test_save(mock_config, config_contents, mocker):
     config = mock_config.config
     mock_open = mocker.mock_open()
