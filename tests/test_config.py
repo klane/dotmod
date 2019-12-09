@@ -12,8 +12,8 @@ def test_config(mock_config, config_contents):
     i = [i for (i, x) in enumerate(config_contents) if 'link' in x.keys()][0]
     assert config.path == DOTFILES
     assert config.file == config_file
-    assert all([a == b for a, b in zip(config.config, config_contents)])
-    assert all([a == b for a, b in zip(config.links, config_contents[i]['link'])])
+    assert all(a == b for a, b in zip(config.config, config_contents))
+    assert all(a == b for a, b in zip(config.links, config_contents[i]['link']))
 
 
 def test_add_link(mock_config):

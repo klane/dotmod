@@ -6,7 +6,7 @@ from dotbot.config import ConfigReader
 from . import DOTFILES
 
 
-class Config(object):
+class Config:
     def __init__(self, config_file):
         config_path, config_file = os.path.split(config_file)
 
