@@ -93,7 +93,7 @@ jobs:
             poetry-python${{ matrix.python }}-${{ runner.os }}-
       - name: Install dependencies
         run: |
-          rm ${{ matrix.poetry_cache }}/virtualenvs/modbot-py${{ matrix.python }}/lib/python${{ matrix.python }}/site-packages/modbot.egg-link
+          rm -f ${{ matrix.poetry_cache }}/virtualenvs/modbot-py${{ matrix.python }}/lib/python${{ matrix.python }}/site-packages/modbot.egg-link
           poetry install
       - name: Runs tests
         run: |
