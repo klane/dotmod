@@ -1,5 +1,4 @@
 import os
-from itertools import product
 
 import pytest
 
@@ -7,17 +6,12 @@ from modbot import DOTFILES, HOME
 from modbot.modbot import add
 from tests import file
 
-options = [
-    (None, HOME),
-    [file],
-    (None, DOTFILES, 'test'),
-    (None, file, file + '1'),
-    (False, True),
-]
-options = list(product(*options))
 
-
-@pytest.mark.parametrize('source_path, source, target_path, target, run', options)
+@pytest.mark.parametrize('source_path', (None, HOME))
+@pytest.mark.parametrize('source', [file])
+@pytest.mark.parametrize('target_path', (None, DOTFILES, 'test'))
+@pytest.mark.parametrize('target', (None, file, file + '1'))
+@pytest.mark.parametrize('run', (False, True))
 def test_add(source_path, source, target_path, target, run, mock_modbot, mocker):
     config = mock_modbot.config
     xsource = os.path.join(source_path or os.getcwd(), source)

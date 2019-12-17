@@ -1,5 +1,4 @@
 import os
-from itertools import product
 
 import pytest
 
@@ -7,11 +6,10 @@ from modbot import DOTFILES, HOME
 from modbot.modbot import remove
 from tests import file
 
-options = [(None, DOTFILES, 'test'), (file, file + '1'), (False, True)]
-options = list(product(*options))
 
-
-@pytest.mark.parametrize('target_path, target, run', options)
+@pytest.mark.parametrize('target_path', (None, DOTFILES, 'test'))
+@pytest.mark.parametrize('target', (file, file + '1'))
+@pytest.mark.parametrize('run', (False, True))
 def test_remove(target_path, target, run, mock_modbot, mocker):
     config = mock_modbot.config
     xsource = os.path.join(HOME, file)
