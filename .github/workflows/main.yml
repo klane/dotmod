@@ -11,8 +11,6 @@ jobs:
         uses: actions/checkout@v1
       - name: Set up Python
         uses: actions/setup-python@v1
-        with:
-          python-version: 3.7
       - name: Install Poetry
         run: |
           curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
@@ -32,8 +30,6 @@ jobs:
         uses: actions/checkout@v1
       - name: Set up Python
         uses: actions/setup-python@v1
-        with:
-          python-version: 3.7
       - name: Install pre-commit
         run: |
           pip install pre-commit
