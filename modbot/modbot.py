@@ -8,7 +8,7 @@ from .config import Config
 
 
 def add(config, filename, target=None, run=False):
-    config = Config(config) if type(config) is str else config
+    config = Config(config) if isinstance(config, str) else config
     path, filename = os.path.split(filename)
 
     if not path:
@@ -46,7 +46,7 @@ def add(config, filename, target=None, run=False):
 
 
 def remove(config, filename, run=False):
-    config = Config(config) if type(config) is str else config
+    config = Config(config) if isinstance(config, str) else config
 
     if config.path not in filename:
         filename = os.path.join(config.path, filename)
