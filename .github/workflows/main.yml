@@ -70,17 +70,17 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Install Poetry
         uses: dschep/install-poetry-action@v1.2
+      - name: Write environment information to a file
+        run: |
+          pwd > environment
+          python --version >> environment
       - name: Restore cache
         uses: actions/cache@v1
         with:
           path: ${{ matrix.poetry_cache }}
-          key: poetry-python${{ matrix.python }}-${{ runner.os }}-${{ hashFiles('poetry.lock') }}
+          key: poetry|${{ hashFiles('environment') }}|${{ hashFiles('poetry.lock') }}
           restore-keys: |
-            poetry-python${{ matrix.python }}-${{ runner.os }}-
-      - name: Remove egg link on macOS
-        if: startsWith(runner.os, 'macOS')
-        run: |
-          rm ${{ matrix.poetry_cache }}/virtualenvs/modbot-py${{ matrix.python }}/lib/python${{ matrix.python }}/site-packages/modbot.egg-link
+            poetry|${{ hashFiles('environment') }}
       - name: Install dependencies
         run: |
           poetry install
