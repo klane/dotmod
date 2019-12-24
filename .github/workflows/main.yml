@@ -12,14 +12,12 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v1
       - name: Install Poetry
-        run: |
-          curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+        uses: dschep/install-poetry-action@v1.2
       - name: Install Safety
         run: |
           pip install safety
       - name: Check dependencies
         run: |
-          source $HOME/.poetry/env
           poetry show -a | sed 's/(!)//' | awk '{print $1,"==",$2}' | safety check --stdin
 
   Linting:
@@ -59,15 +57,12 @@ jobs:
         include:
           - os: ubuntu-latest
             os_name: Linux
-            poetry_path: ~/.poetry/bin
             poetry_cache: ~/.cache/pypoetry
           - os: macos-latest
             os_name: macOS
-            poetry_path: ~/.poetry/bin
             poetry_cache: ~/Library/Caches/pypoetry
           - os: windows-latest
             os_name: Windows
-            poetry_path: $env:Userprofile\.poetry\bin
             poetry_cache: ~\AppData\Local\pypoetry\Cache
 
     steps:
@@ -78,9 +73,7 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - name: Install Poetry
-        run: |
-          curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
-          echo "::add-path::${{ matrix.poetry_path }}"
+        uses: dschep/install-poetry-action@v1.2
       - name: Restore cache
         uses: actions/cache@v1
         with:
