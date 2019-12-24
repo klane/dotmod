@@ -14,11 +14,9 @@ jobs:
       - name: Install Poetry
         uses: dschep/install-poetry-action@v1.2
       - name: Install Safety
-        run: |
-          pip install safety
+        run: pip install safety
       - name: Check dependencies
-        run: |
-          poetry show -a | sed 's/(!)//' | awk '{print $1,"==",$2}' | safety check --stdin
+        run: poetry show -a | sed 's/(!)//' | awk '{print $1,"==",$2}' | safety check --stdin
 
   Linting:
     runs-on: ubuntu-latest
@@ -42,7 +40,7 @@ jobs:
         uses: pre-commit/action@v1.0.0
 
   test:
-    name: "${{ matrix.os_name }}: Python ${{ matrix.python }}"
+    name: '${{ matrix.os_name }}: Python ${{ matrix.python }}'
     needs: [Safety, Linting]
     runs-on: ${{ matrix.os }}
     strategy:
@@ -82,21 +80,18 @@ jobs:
           restore-keys: |
             poetry|${{ hashFiles('environment') }}
       - name: Install dependencies
-        run: |
-          poetry install
-      - name: Runs tests
-        run: |
-          poetry run pytest tests/ --cov=modbot
+        run: poetry install
+      - name: Run tests
+        run: poetry run pytest tests/ --cov=modbot
       - name: Generate coverage report
-        run: |
-          poetry run coverage xml
+        run: poetry run coverage xml
       - name: Upload coverage report
-        if: success()
         uses: codecov/codecov-action@v1
+        if: success()
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./coverage.xml
-      - name: Slack notification
+      - name: Send Slack message on failure
         uses: homoluctus/slatify@v2.0.1
         if: failure()
         with:
@@ -111,7 +106,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Slack notification
+      - name: Send Slack message
         uses: homoluctus/slatify@v2.0.1
         if: always()
         with:
