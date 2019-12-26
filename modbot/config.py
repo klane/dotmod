@@ -7,7 +7,14 @@ from . import DOTFILES
 
 
 class Config:
+    """Class to capture output from Dotbot ConfigReader"""
+
     def __init__(self, config_file):
+        """Create Dotbot config object from .yaml file
+
+        Args:
+            config_file (str): Path to Dotbot config file
+        """
         config_path, config_file = os.path.split(config_file)
 
         if not config_path:
@@ -21,12 +28,26 @@ class Config:
         self.links = self.config[index]['link']
 
     def add_link(self, key, value):
+        """Add link to Dotbot config
+
+        Args:
+            key (str): Location to which file will be linked
+            value (str): Location in dotfiles repo where file will be stored
+        """
         if key in self.links:
             raise ConfigError('File {} already in config'.format(key))
 
         self.links[key] = os.path.relpath(value, DOTFILES)
 
     def remove_link(self, value):
+        """Remove link from Dotbot config
+
+        Args:
+            value (str): Location in dotfiles repo to remove
+
+        Returns:
+            str: Link target location
+        """
         if value not in self.links.values():
             raise ConfigError('File {} not in config'.format(value))
 
@@ -35,9 +56,12 @@ class Config:
         return key
 
     def save(self):
+        """Save Dotbot config file"""
         with open(self.file, 'w') as config_file:
             yaml.safe_dump(self.config, config_file, default_flow_style=False)
 
 
 class ConfigError(Exception):
+    """Class representing an exception with Dotbot configs"""
+
     pass
