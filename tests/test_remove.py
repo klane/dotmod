@@ -22,7 +22,7 @@ def test_remove(target_path, target, run, mock_modbot, mocker):
     if config.path not in xtarget:
         xtarget = os.path.join(config.path, xtarget)
 
-    mocker.patch('os.path.isfile', lambda f: f in (xsource, xtarget))
+    mocker.patch('os.path.isfile', lambda filename: filename in (xsource, xtarget))
     mock_remove = mocker.patch('os.remove')
     remove(config, target, run)
 

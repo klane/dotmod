@@ -53,7 +53,7 @@ def mock_config(config_yaml, mocker, request):
 
 @pytest.fixture
 def mock_isfile(mock_modbot, mocker):
-    mocker.patch('os.path.isfile', lambda f: f == repo_file)
+    mocker.patch('os.path.isfile', lambda filename: filename == repo_file)
     return mock_modbot
 
 

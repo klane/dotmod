@@ -16,7 +16,7 @@ def test_add(source_path, source, target_path, target, run, mock_modbot, mocker)
     config = mock_modbot.config
     xsource = os.path.join(source_path or os.getcwd(), source)
     xtarget = os.path.join(target_path or config.path, target or source)
-    mocker.patch('os.path.isfile', lambda f: f == xsource)
+    mocker.patch('os.path.isfile', lambda filename: filename == xsource)
 
     if source_path is not None:
         source = os.path.join(source_path, source)
