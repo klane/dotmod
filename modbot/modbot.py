@@ -8,6 +8,14 @@ from .config import Config
 
 
 def add(config, filename, target=None, run=False):
+    """Add file to dotfiles repo
+
+        Args:
+            config (Config or str): Dotbot config object or path to Dotbot config file
+            filename (str): File path to add
+            target (str): Destination location (default: None, links to repository root)
+            run (bool): Flag to run Dotbot (default: False)
+    """
     config = Config(config) if isinstance(config, str) else config
     path, filename = os.path.split(filename)
 
@@ -46,6 +54,13 @@ def add(config, filename, target=None, run=False):
 
 
 def remove(config, filename, run=False):
+    """Remove file from dotfiles repo
+
+        Args:
+            config (Config or str): Dotbot config object or path to Dotbot config file
+            filename (str): File path within repo to remove
+            run (bool): Flag to run Dotbot (default: False)
+    """
     config = Config(config) if isinstance(config, str) else config
 
     if config.path not in filename:
@@ -70,6 +85,12 @@ def remove(config, filename, run=False):
 
 
 def notify(src, dst):
+    """Notify user of files being moved
+
+        Args:
+            src (str): Source location
+            dst (str): Destination location
+    """
     src = src.replace(HOME, '~')
     dst = dst.replace(HOME, '~')
 
@@ -80,5 +101,10 @@ def notify(src, dst):
 
 
 def run_dotbot(config_file):
+    """Run Dotbot with the given config file
+
+        Args:
+            config_file (str): Path to Dotbot config file
+    """
     sys.argv[1:] = ['--config-file', config_file]
     dotbot.main()
