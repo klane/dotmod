@@ -4,14 +4,14 @@ import sys
 import pytest
 
 from modbot import DOTFILES
-from tests import config_file, file
+from tests import CONFIG_FILE, FILE
 
 
 def test_config(mock_config, config_contents):
     config = mock_config.config
     i = [i for (i, x) in enumerate(config_contents) if 'link' in x.keys()][0]
     assert config.path == DOTFILES
-    assert config.file == config_file
+    assert config.file == CONFIG_FILE
     assert all(a == b for a, b in zip(config.config, config_contents))
     assert all(a == b for a, b in zip(config.links, config_contents[i]['link']))
 
@@ -19,7 +19,7 @@ def test_config(mock_config, config_contents):
 def test_add_link(mock_config):
     config = mock_config.config
     n = len(config.links)
-    newfile = file + '1'
+    newfile = FILE + '1'
     config.add_link('~/' + newfile, os.path.join(DOTFILES, newfile))
     assert len(config.links) == n + 1
     assert config.links['~/' + newfile] == newfile
@@ -28,9 +28,9 @@ def test_add_link(mock_config):
 def test_remove_link(mock_config):
     config = mock_config.config
     n = len(config.links)
-    key = config.remove_link(file)
+    key = config.remove_link(FILE)
     assert len(config.links) == n - 1
-    assert key == '~/' + file
+    assert key == '~/' + FILE
 
 
 @pytest.mark.skipif(sys.version_info.major == 2, reason='requires python3')

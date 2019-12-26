@@ -5,7 +5,7 @@ import pytest
 from modbot import DOTFILES
 from modbot.config import Config, ConfigError
 from modbot.modbot import add, remove
-from tests import file, repo_file
+from tests import FILE, REPO_FILE
 
 
 @pytest.mark.parametrize(
@@ -19,13 +19,13 @@ from tests import file, repo_file
 )
 def test_modbot_exceptions(function, mocks, message):
     with pytest.raises(OSError, match=message):
-        function(mocks.config, repo_file)
+        function(mocks.config, REPO_FILE)
 
 
 @pytest.mark.parametrize(
     'method, inputs, message',
     [
-        (Config.add_link, ['~/' + file, repo_file], 'already in config'),
+        (Config.add_link, ['~/' + FILE, REPO_FILE], 'already in config'),
         (Config.remove_link, [os.path.join(DOTFILES, '.fakefile')], 'not in config'),
     ],
 )

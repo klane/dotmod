@@ -4,15 +4,15 @@ import pytest
 
 from modbot import DOTFILES, HOME
 from modbot.modbot import remove
-from tests import file
+from tests import FILE
 
 
 @pytest.mark.parametrize('target_path', (None, DOTFILES, 'test'))
-@pytest.mark.parametrize('target', (file, file + '1'))
+@pytest.mark.parametrize('target', (FILE, FILE + '1'))
 @pytest.mark.parametrize('run', (False, True))
 def test_remove(target_path, target, run, mock_modbot, mocker):
     config = mock_modbot.config
-    xsource = os.path.join(HOME, file)
+    xsource = os.path.join(HOME, FILE)
     xtarget = os.path.join(target_path or config.path, target)
     config.remove_link.return_value = xsource
 

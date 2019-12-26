@@ -6,7 +6,7 @@ import yaml
 
 from modbot import DOTFILES, HOME
 from modbot.config import Config
-from tests import config_file, file, repo_file
+from tests import CONFIG_FILE, FILE, REPO_FILE
 
 try:
     from StringIO import StringIO
@@ -28,7 +28,7 @@ def config_yaml():
     data.write('- clean:\n')
     data.write("  - '~'\n")
     data.write('- link:\n')
-    data.write('    ~/{0}: {0}\n'.format(file))
+    data.write('    ~/{0}: {0}\n'.format(FILE))
     return data.getvalue()
 
 
@@ -37,7 +37,7 @@ def config_contents(config_yaml):
     return yaml.safe_load(config_yaml)
 
 
-@pytest.fixture(params=[os.path.basename(config_file), config_file])
+@pytest.fixture(params=[os.path.basename(CONFIG_FILE), CONFIG_FILE])
 def mock_config(config_yaml, mocker, request):
     mock_open = mocker.mock_open(read_data=config_yaml)
 
@@ -53,7 +53,7 @@ def mock_config(config_yaml, mocker, request):
 
 @pytest.fixture
 def mock_isfile(mock_modbot, mocker):
-    mocker.patch('os.path.isfile', lambda filename: filename == repo_file)
+    mocker.patch('os.path.isfile', lambda filename: filename == REPO_FILE)
     return mock_modbot
 
 
@@ -61,7 +61,7 @@ def mock_isfile(mock_modbot, mocker):
 def mock_modbot(mocker):
     config = mocker.MagicMock()
     config.path = DOTFILES
-    config.file = config_file
+    config.file = CONFIG_FILE
 
     dotbot = mocker.patch('modbot.modbot.run_dotbot')
     rename = mocker.patch('os.rename')

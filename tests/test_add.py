@@ -4,13 +4,13 @@ import pytest
 
 from modbot import DOTFILES, HOME
 from modbot.modbot import add
-from tests import file
+from tests import FILE
 
 
 @pytest.mark.parametrize('source_path', (None, HOME))
-@pytest.mark.parametrize('source', [file])
+@pytest.mark.parametrize('source', [FILE])
 @pytest.mark.parametrize('target_path', (None, DOTFILES, 'test'))
-@pytest.mark.parametrize('target', (None, file, file + '1'))
+@pytest.mark.parametrize('target', (None, FILE, FILE + '1'))
 @pytest.mark.parametrize('run', (False, True))
 def test_add(source_path, source, target_path, target, run, mock_modbot, mocker):
     config = mock_modbot.config
