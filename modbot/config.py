@@ -35,8 +35,8 @@ class Config:
         return key
 
     def save(self):
-        with open(self.file, 'w') as f:
-            yaml.safe_dump(self.config, f, default_flow_style=False)
+        with open(self.file, 'w') as config_file:
+            yaml.safe_dump(self.config, config_file, default_flow_style=False)
 
 
 class ConfigError(Exception):
