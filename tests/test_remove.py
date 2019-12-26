@@ -32,6 +32,9 @@ def test_remove(target_path, target, run, mock_modbot, mocker):
     mock_modbot.rename.assert_called_once_with(xtarget, xsource)
 
     if run:
-        mock_modbot.dotbot.assert_called_once()
+        try:
+            mock_modbot.dotbot.assert_called_once()
+        except AttributeError:
+            mock_modbot.dotbot.assert_called()
     else:
         mock_modbot.dotbot.assert_not_called()
