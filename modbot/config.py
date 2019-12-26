@@ -63,5 +63,3 @@ class Config:
 
 class ConfigError(Exception):
     """Class representing an exception with Dotbot configs"""
-
-    pass
