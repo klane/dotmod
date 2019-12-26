@@ -5,7 +5,7 @@
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=klane/jekyllnb)](https://dependabot.com)
 [![License](https://img.shields.io/github/license/klane/modbot.svg?label=License)](LICENSE)
 
-ModBot allows you to easily add and remove files from your dotfiles repo and your Dotbot install.conf.yaml file.
+ModBot allows you to easily add and remove files from your dotfiles repo and your [Dotbot](https://github.com/anishathalye/dotbot) install.conf.yaml file.
 
 ## Add
 
