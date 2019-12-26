@@ -34,6 +34,6 @@ def test_add(source_path, source, target_path, target, run, mock_modbot, mocker)
     mock_modbot.rename.assert_called_once_with(xsource, xtarget)
 
     if run:
-        mock_modbot.dotbot.assert_called_once_with(config.file)
+        mock_modbot.dotbot.assert_called_once()
     else:
         mock_modbot.dotbot.assert_not_called()

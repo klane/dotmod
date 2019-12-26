@@ -63,7 +63,7 @@ def mock_modbot(mocker):
     config.path = DOTFILES
     config.file = CONFIG_FILE
 
-    dotbot = mocker.patch('modbot.modbot.run_dotbot')
+    dotbot = mocker.patch('dotbot.main')
     rename = mocker.patch('os.rename')
 
     mocks = namedtuple('mocks', 'config dotbot rename')
