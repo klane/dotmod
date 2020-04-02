@@ -8,7 +8,7 @@ readme = "README.md"
 repository = "https://github.com/klane/modbot"
 
 [tool.poetry.dependencies]
-python = "~2.7 || ^3.4"
+python = "~2.7 || ^3.5"
 dotbot = "^1.17"
 
 [tool.poetry.dev-dependencies]
