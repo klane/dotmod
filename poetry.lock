@@ -465,7 +465,7 @@ version = "5.3.1"
 [[package]]
 category = "dev"
 description = "scandir, a better directory iterator and faster os.walk()"
-marker = "python_version < \"3.5\" or python_version < \"3\" and sys_platform != \"win32\" or python_version < \"3.4\" and sys_platform != \"win32\" or python_version < \"3.4\" and sys_platform != \"win32\" and (python_version < \"3.5\" or python_version < \"3.4\" and sys_platform != \"win32\")"
+marker = "python_version < \"3.5\" or python_version < \"3.4\" and sys_platform != \"win32\""
 name = "scandir"
 optional = false
 python-versions = "*"
