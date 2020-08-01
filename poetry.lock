@@ -106,10 +106,10 @@ description = "A tool that bootstraps your dotfiles"
 name = "dotbot"
 optional = false
 python-versions = "*"
-version = "1.17.0"
+version = "1.17.1"
 
 [package.dependencies]
-PyYAML = ">=5.1.2,<6"
+PyYAML = ">=5.3,<6"
 
 [[package]]
 category = "dev"
@@ -676,8 +676,8 @@ distlib = [
     {file = "distlib-0.3.0.zip", hash = "sha256:2e166e231a26b36d6dfe35a48c4464346620f8645ed0ace01ee31822b288de21"},
 ]
 dotbot = [
-    {file = "dotbot-1.17.0-py2.py3-none-any.whl", hash = "sha256:9d2e221055e5e660a45dd58af14695f5dbcd2fee4fe077af6852fc479c36c5fb"},
-    {file = "dotbot-1.17.0.tar.gz", hash = "sha256:db63e659a70fd5a3b001afe9baab093a629334a7c430fa98cce7c8b8962657d7"},
+    {file = "dotbot-1.17.1-py2.py3-none-any.whl", hash = "sha256:cbe29f502fab2ca089391b632413d7005590728ef34be198276262963ea2b8fa"},
+    {file = "dotbot-1.17.1.tar.gz", hash = "sha256:7e667c8855826cfa92b92afd4c1b5e6f2579f57823077d16205cb18c622962f5"},
 ]
 filelock = [
     {file = "filelock-3.0.12-py3-none-any.whl", hash = "sha256:929b7d63ec5b7d6b71b0fa5ac14e030b3f70b75747cef1b10da9b879fef15836"},
