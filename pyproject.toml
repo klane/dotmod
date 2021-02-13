@@ -9,7 +9,7 @@ repository = "https://github.com/klane/modbot"
 
 [tool.poetry.dependencies]
 python = "~2.7 || ^3.5"
-dotbot = "^1.17"
+dotbot = "^1.18"
 
 [tool.poetry.dev-dependencies]
 pytest = "^4.6"

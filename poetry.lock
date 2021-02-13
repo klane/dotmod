@@ -111,7 +111,7 @@ python-versions = "*"
 
 [[package]]
 name = "dotbot"
-version = "1.17.1"
+version = "1.18.0"
 description = "A tool that bootstraps your dotfiles"
 category = "main"
 optional = false
@@ -524,7 +524,7 @@ testing = ["pathlib2", "unittest2", "jaraco.itertools", "func-timeout"]
 [metadata]
 lock-version = "1.1"
 python-versions = "~2.7 || ^3.5"
-content-hash = "f494327bf84fce863f1d63516a1bc70d09e55390dd73994f1489ebfd93f46282"
+content-hash = "80b8587e598daf621d681ed3d6bc7ef4f10a371f822192bb8fe133b15ea32645"
 
 [metadata.files]
 appdirs = [
@@ -604,8 +604,8 @@ distlib = [
     {file = "distlib-0.3.1.zip", hash = "sha256:edf6116872c863e1aa9d5bb7cb5e05a022c519a4594dc703843343a9ddd9bff1"},
 ]
 dotbot = [
-    {file = "dotbot-1.17.1-py2.py3-none-any.whl", hash = "sha256:cbe29f502fab2ca089391b632413d7005590728ef34be198276262963ea2b8fa"},
-    {file = "dotbot-1.17.1.tar.gz", hash = "sha256:7e667c8855826cfa92b92afd4c1b5e6f2579f57823077d16205cb18c622962f5"},
+    {file = "dotbot-1.18.0-py2.py3-none-any.whl", hash = "sha256:7595f85439435d93b8a8b4c57b924abac7ce9b73389fd87bf1183dd0e6d8c919"},
+    {file = "dotbot-1.18.0.tar.gz", hash = "sha256:b2589290ed1120b9e7a2bcbdedaad89dd863909f2085b7bc2eed32d171d75026"},
 ]
 filelock = [
     {file = "filelock-3.0.12-py3-none-any.whl", hash = "sha256:929b7d63ec5b7d6b71b0fa5ac14e030b3f70b75747cef1b10da9b879fef15836"},
@@ -700,6 +700,8 @@ pyyaml = [
     {file = "PyYAML-5.3.1-cp37-cp37m-win_amd64.whl", hash = "sha256:73f099454b799e05e5ab51423c7bcf361c58d3206fa7b0d555426b1f4d9a3eaf"},
     {file = "PyYAML-5.3.1-cp38-cp38-win32.whl", hash = "sha256:06a0d7ba600ce0b2d2fe2e78453a470b5a6e000a985dd4a4e54e436cc36b0e97"},
     {file = "PyYAML-5.3.1-cp38-cp38-win_amd64.whl", hash = "sha256:95f71d2af0ff4227885f7a6605c37fd53d3a106fcab511b8860ecca9fcf400ee"},
+    {file = "PyYAML-5.3.1-cp39-cp39-win32.whl", hash = "sha256:ad9c67312c84def58f3c04504727ca879cb0013b2517c85a9a253f0cb6380c0a"},
+    {file = "PyYAML-5.3.1-cp39-cp39-win_amd64.whl", hash = "sha256:6034f55dab5fea9e53f436aa68fa3ace2634918e8b5994d82f3621c04ff5ed2e"},
     {file = "PyYAML-5.3.1.tar.gz", hash = "sha256:b8eac752c5e14d3eca0e6dd9199cd627518cb5ec06add0de9d32baeee6fe645d"},
 ]
 scandir = [
