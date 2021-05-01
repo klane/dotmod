@@ -111,7 +111,7 @@ python-versions = "*"
 
 [[package]]
 name = "dotbot"
-version = "1.18.0"
+version = "1.19.0"
 description = "A tool that bootstraps your dotfiles"
 category = "main"
 optional = false
@@ -524,7 +524,7 @@ testing = ["pathlib2", "unittest2", "jaraco.itertools", "func-timeout"]
 [metadata]
 lock-version = "1.1"
 python-versions = "~2.7 || ^3.5"
-content-hash = "853e7fc1bf26c7ce93650fdf4d7d1ae77271611e1c23b3d7ce077f7d7bf8ed0d"
+content-hash = "67cfb911ef040835e070d7d8450e050b11fab48114fff1c16adec23ca783ee67"
 
 [metadata.files]
 appdirs = [
@@ -604,8 +604,8 @@ distlib = [
     {file = "distlib-0.3.1.zip", hash = "sha256:edf6116872c863e1aa9d5bb7cb5e05a022c519a4594dc703843343a9ddd9bff1"},
 ]
 dotbot = [
-    {file = "dotbot-1.18.0-py2.py3-none-any.whl", hash = "sha256:7595f85439435d93b8a8b4c57b924abac7ce9b73389fd87bf1183dd0e6d8c919"},
-    {file = "dotbot-1.18.0.tar.gz", hash = "sha256:b2589290ed1120b9e7a2bcbdedaad89dd863909f2085b7bc2eed32d171d75026"},
+    {file = "dotbot-1.19.0-py2.py3-none-any.whl", hash = "sha256:4734f45934fb92b58c0f7eb9f7877633db07e8acd9505bbeb89af2bcebc3f5ba"},
+    {file = "dotbot-1.19.0.tar.gz", hash = "sha256:29f4a461462a5ff3b1e9929849458e88d827a45d764f582c633237edd373f0af"},
 ]
 filelock = [
     {file = "filelock-3.0.12-py3-none-any.whl", hash = "sha256:929b7d63ec5b7d6b71b0fa5ac14e030b3f70b75747cef1b10da9b879fef15836"},
