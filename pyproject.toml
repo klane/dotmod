@@ -18,7 +18,7 @@ pytest-lazy-fixture = "^0.6.3"
 pytest-mock = "^2.0"
 pytest-sugar = "^0.9.4"
 pre-commit = "^1.18"
-tox = "^3.22"
+tox = "^3.24"
 
 [tool.black]
 line-length = 88
