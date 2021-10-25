@@ -23,9 +23,9 @@ class Config:
         self.path = config_path
         self.file = os.path.join(self.path, config_file)
         reader = ConfigReader(self.file)
-        self.config = reader.get_config()
-        index = [i for i, d in enumerate(self.config) if 'link' in d][0]
-        self.links = self.config[index]['link']
+        self.contents = reader.get_config()
+        index = [i for i, d in enumerate(self.contents) if 'link' in d][0]
+        self.links = self.contents[index]['link']
 
     def add_link(self, key, value):
         """Add link to Dotbot config
@@ -58,7 +58,7 @@ class Config:
     def save(self):
         """Save Dotbot config file"""
         with open(self.file, 'w') as config_file:
-            yaml.safe_dump(self.config, config_file, default_flow_style=False)
+            yaml.safe_dump(self.contents, config_file, default_flow_style=False)
 
 
 class ConfigError(Exception):
