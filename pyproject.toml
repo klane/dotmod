@@ -29,7 +29,6 @@ line-length = 88
 
 [tool.isort]
 profile = "black"
-known_third_party = ["dotbot", "pytest", "yaml"]
 
 [tool.tox]
 legacy_tox_ini = """
