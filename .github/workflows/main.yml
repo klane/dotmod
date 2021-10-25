@@ -8,11 +8,11 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2.3.5
       - name: Set up Python
-        uses: actions/setup-python@v2.2.1
+        uses: actions/setup-python@v2.2.2
       - name: Install Poetry
-        uses: Gr1N/setup-poetry@v4
+        uses: Gr1N/setup-poetry@v7
       - name: Install Safety
         run: pip install safety
       - name: Check dependencies
@@ -23,19 +23,19 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2.3.5
       - name: Set up Python
-        uses: actions/setup-python@v2.2.1
+        uses: actions/setup-python@v2.2.2
       - name: Hash Python version
         id: hash
         run: echo ::set-output name=hash::$(python --version | sha256sum | cut -d' ' -f1)
       - name: Restore cache
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v2.1.6
         with:
           path: ~/.cache/pre-commit
           key: pre-commit|${{ steps.hash.outputs.hash }}|${{ hashFiles('.pre-commit-config.yaml') }}
       - name: Run pre-commit
-        uses: pre-commit/action@v2.0.0
+        uses: pre-commit/action@v2.0.3
 
   test:
     name: '${{ matrix.os_name }}: Python ${{ matrix.python }}'
@@ -59,19 +59,19 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2.3.5
       - name: Set up Python
-        uses: actions/setup-python@v2.2.1
+        uses: actions/setup-python@v2.2.2
         with:
           python-version: ${{ matrix.python }}
       - name: Install Poetry
-        uses: Gr1N/setup-poetry@v4
+        uses: Gr1N/setup-poetry@v7
       - name: Write environment information to a file
         run: |
           pwd > environment
           python --version >> environment
       - name: Restore cache
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v2.1.6
         if: runner.os != 'Windows'
         with:
           path: ${{ matrix.poetry_cache }}
@@ -83,7 +83,7 @@ jobs:
       - name: Generate coverage report
         run: poetry run coverage xml
       - name: Upload coverage report
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v2.1.0
         if: success()
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
