@@ -3,8 +3,8 @@ import sys
 
 import dotbot
 
-from . import DOTFILES, HOME, LOG
-from .config import Config
+from modbot import DOTFILES, HOME, LOG
+from modbot.config import Config
 
 
 def add(config, filename, target=None, run=False):

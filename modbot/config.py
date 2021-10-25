@@ -3,7 +3,7 @@ import os
 import yaml
 from dotbot.config import ConfigReader
 
-from . import DOTFILES
+from modbot import DOTFILES
 
 
 class Config:
