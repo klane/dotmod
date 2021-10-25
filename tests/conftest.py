@@ -1,5 +1,6 @@
 import os
 from collections import namedtuple
+from io import StringIO
 
 import pytest
 import yaml
@@ -7,11 +8,6 @@ import yaml
 from modbot import DOTFILES, HOME
 from modbot.config import Config
 from tests import CONFIG_FILE, FILE, REPO_FILE
-
-try:
-    from StringIO import StringIO
-except ImportError:
-    from io import StringIO
 
 
 @pytest.fixture(autouse=True)
@@ -40,11 +36,7 @@ def config_contents(config_yaml):
 @pytest.fixture(params=[os.path.basename(CONFIG_FILE), CONFIG_FILE])
 def mock_config(config_yaml, mocker, request):
     mock_open = mocker.mock_open(read_data=config_yaml)
-
-    try:
-        mocker.patch('__builtin__.open', mock_open)
-    except ImportError:
-        mocker.patch('builtins.open', mock_open)
+    mocker.patch('builtins.open', mock_open)
 
     config = Config(request.param)
     mocks = namedtuple('mocks', 'config open')

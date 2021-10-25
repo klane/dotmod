@@ -38,11 +38,7 @@ def test_save(mock_config, config_contents, mocker):
     config = mock_config.config
     mock_open = mocker.mock_open()
     mock_yaml = mocker.patch('yaml.safe_dump')
-
-    try:
-        mock_open = mocker.patch('__builtin__.open', mock_open)
-    except ImportError:
-        mock_open = mocker.patch('builtins.open', mock_open)
+    mocker.patch('builtins.open', mock_open)
 
     config.save()
 
