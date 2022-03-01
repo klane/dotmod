@@ -12,7 +12,7 @@ python = "^3.6"
 dotbot = "^1.19"
 
 [tool.poetry.dev-dependencies]
-pytest = "^6.2"
+pytest = "^7.0"
 pytest-cov = "^3.0"
 pytest-lazy-fixture = "^0.6"
 pytest-mock = "^3.6"
