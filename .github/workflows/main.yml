@@ -12,7 +12,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2.2.2
       - name: Install Poetry
-        uses: Gr1N/setup-poetry@v7
+        uses: Gr1N/setup-poetry@v8
       - name: Install Safety
         run: pip install safety
       - name: Check dependencies
@@ -65,7 +65,7 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - name: Install Poetry
-        uses: Gr1N/setup-poetry@v7
+        uses: Gr1N/setup-poetry@v8
       - name: Write environment information to a file
         run: |
           pwd > environment
