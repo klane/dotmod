@@ -10,7 +10,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.3.5
       - name: Set up Python
-        uses: actions/setup-python@v2.2.2
+        uses: actions/setup-python@v4.5.0
       - name: Install Poetry
         uses: Gr1N/setup-poetry@v7
       - name: Install Safety
@@ -25,7 +25,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.3.5
       - name: Set up Python
-        uses: actions/setup-python@v2.2.2
+        uses: actions/setup-python@v4.5.0
       - name: Hash Python version
         id: hash
         run: echo ::set-output name=hash::$(python --version | sha256sum | cut -d' ' -f1)
@@ -61,7 +61,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.3.5
       - name: Set up Python
-        uses: actions/setup-python@v2.2.2
+        uses: actions/setup-python@v4.5.0
         with:
           python-version: ${{ matrix.python }}
       - name: Install Poetry
