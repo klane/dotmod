@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.5
+        uses: actions/checkout@v3.5.0
       - name: Set up Python
         uses: actions/setup-python@v2.2.2
       - name: Install Poetry
@@ -23,7 +23,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.5
+        uses: actions/checkout@v3.5.0
       - name: Set up Python
         uses: actions/setup-python@v2.2.2
       - name: Hash Python version
@@ -59,7 +59,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.5
+        uses: actions/checkout@v3.5.0
       - name: Set up Python
         uses: actions/setup-python@v2.2.2
         with:
